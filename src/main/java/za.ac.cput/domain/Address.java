@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Address implements Serializable {
+public class Address /*implements Serializable*/ {
     @Id
     private String addressID;
     private String street;

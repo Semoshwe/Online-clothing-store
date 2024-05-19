@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class User implements Serializable {
+public class User /*implements Serializable*/ {
     @Id
     private String userID;
     private String firstName;
@@ -145,6 +145,16 @@ public class User implements Serializable {
 
         public Builder setCustomerID(String customerID) {
             this.customerID = customerID;
+            return this;
+        }
+        public Builder copy(User user){
+            this.userID = user.userID;
+            this.firstName = user.firstName;
+            this.lastName = user.lastName;
+            this.password = user.password;
+            this.email = user.email;
+            this.address = user.address;
+            this.customerID = user.customerID;
             return this;
         }
 

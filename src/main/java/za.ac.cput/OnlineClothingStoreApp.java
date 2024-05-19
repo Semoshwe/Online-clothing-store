@@ -8,6 +8,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
+
 public class OnlineClothingStoreApp {
     public static void main(String[] args){
         SpringApplication.run(OnlineClothingStoreApp.class, args);
