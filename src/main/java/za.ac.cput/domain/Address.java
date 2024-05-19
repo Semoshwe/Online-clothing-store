@@ -3,11 +3,13 @@ package za.ac.cput.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
+
 @Entity
-public class Address {
+public class Address /*implements Serializable*/ {
     @Id
-    private String AddressID;
-    private String Street;
+    private String addressID;
+    private String street;
     private String city;
     private String province;
     private String zipCode;
@@ -16,59 +18,78 @@ public class Address {
     }
 
     private Address(Builder builder) {
-        this.AddressID = builder.AddressID;
-        this.Street = builder.Street;
+        this.addressID = builder.addressID;
+        this.street = builder.street;
         this.city = builder.city;
         this.province = builder.province;
         this.zipCode = builder.zipCode;
-
     }
 
     public String getAddressID() {
-        return AddressID;
+        return addressID;
+    }
+
+    public void setAddressID(String addressID) {
+        this.addressID = addressID;
     }
 
     public String getStreet() {
-        return Street;
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getCity() {
         return city;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getProvince() {
         return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
     @Override
     public String toString() {
         return "Address{" +
-                "AddressID=" + AddressID +
-                ", Street='" + Street + '\'' +
+                "addressID='" + addressID + '\'' +
+                ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 '}';
     }
 
-    public static class Builder{
-        private String AddressID;
-        private String Street;
+    public static class Builder {
+        private String addressID;
+        private String street;
         private String city;
         private String province;
         private String zipCode;
 
-        public Builder setAddressID(String AddressID) {
-            AddressID = AddressID;
+        public Builder setAddressID(String addressID) {
+            this.addressID = addressID;
             return this;
         }
 
         public Builder setStreet(String street) {
-            Street = street;
+            this.street = street;
             return this;
         }
 
@@ -87,18 +108,17 @@ public class Address {
             return this;
         }
 
-        public Builder copy(Address address){
-            this.AddressID = address.AddressID;
-            this.Street = address.Street;
+        public Builder copy(Address address) {
+            this.addressID = address.addressID;
+            this.street = address.street;
             this.city = address.city;
             this.province = address.province;
             this.zipCode = address.zipCode;
             return this;
         }
 
-        public Address build(){
+        public Address build() {
             return new Address(this);
         }
     }
-
 }

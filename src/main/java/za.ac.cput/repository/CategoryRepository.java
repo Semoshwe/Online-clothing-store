@@ -13,7 +13,10 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Category;
 
 @Repository
-public interface ICategoryRepository extends JpaRepository<Category, String> {
+public interface CategoryRepository extends JpaRepository<Category, String> {
+    Category findCategoryByCategoryID(String categoryID);
     Category findCategoryByCategoryName(String categoryName);
+    //Category findByIDAndCategoryName(String categoryID, String categoryName);
+
     boolean deleteCategoryByCategoryName(String categoryName);
 }

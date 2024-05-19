@@ -1,19 +1,13 @@
 package za.ac.cput.domain;
 
-/*
- * Order: java
- * Order: Model Class
- * Author: Rethabile Ntsekhe (220455430)
- * Date: 17 May 2024
- */
-
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Order {
+public class Order implements Serializable {
     @Id
     private String orderID;
     private String customerID;
@@ -26,9 +20,9 @@ public class Order {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "order_id")
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "OrderItem", joinColumns = @JoinColumn(name = "order_id"))
+    private List<OrderItem> orderItems;
 
     public Order() {}
 
@@ -120,7 +114,7 @@ public class Order {
         private LocalDateTime orderDate;
         private double totalPrice;
         private String status;
-        private List<OrderItem> orderItems = new ArrayList<>();
+        private List<OrderItem> orderItems;
 
         public Builder setOrderID(String orderID) {
             this.orderID = orderID;

@@ -1,10 +1,9 @@
 package za.ac.cput.repository;
 
+import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Customer;
-import za.ac.cput.domain.Order;
 
 import java.util.List;
-import java.util.Objects;
 
 /*
  *CustomerRepo :java
@@ -12,7 +11,8 @@ import java.util.Objects;
  * Student num: 22045540
  * Date: 17 May 2024
  */
-public interface ICustomerRepo extends IRepository<Customer, String> {
+@Repository
+public interface CustomerRepo extends IRepository<Customer, String> {
 
     Customer create(Customer customer);
 

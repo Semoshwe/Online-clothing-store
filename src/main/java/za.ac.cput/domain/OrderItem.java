@@ -1,20 +1,12 @@
 package za.ac.cput.domain;
 
-/*
- * OrderItem: java
- * OrderItem: Model Class
- * Author: Luke Duffell
- * Student no: 217061567
- * Date: 17 May 2024
- */
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import java.io.Serializable;
 
 @Entity
-public class OrderItem {
+@Embeddable
+public class OrderItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +21,6 @@ public class OrderItem {
         this.quantity = builder.quantity;
         this.price = builder.price;
     }
-
 
     public Long getId() {
         return id;
@@ -112,3 +103,4 @@ public class OrderItem {
         }
     }
 }
+
