@@ -22,7 +22,7 @@ public interface OrderRepository extends IRepository<Order, Long> {
     Order save(Order order);
 
     //List<Order> findById(Long id);
-   Optional<Order> findById(Long id);
+   Optional<Order> findById(String id);
 
     List<Order> findAll();
 }

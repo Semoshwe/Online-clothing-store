@@ -16,14 +16,7 @@ public class Order implements Serializable {
     private LocalDateTime orderDate;
     private double totalPrice;
     private String status;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
-
-    @ElementCollection
-    @CollectionTable(name = "OrderItem", joinColumns = @JoinColumn(name = "order_id"))
-    private List<OrderItem> orderItems;
+    private String orderItemsID;
 
     public Order() {}
 
@@ -34,10 +27,10 @@ public class Order implements Serializable {
         this.orderDate = builder.orderDate;
         this.totalPrice = builder.totalPrice;
         this.status = builder.status;
-        this.orderItems = builder.orderItems;
+        this.orderItemsID = builder.orderItemsID;
     }
 
-    public Long getOrderID() {
+    public String  getOrderID() {
         return orderID;
     }
 
@@ -61,8 +54,8 @@ public class Order implements Serializable {
         return status;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public String  getOrderItems() {
+        return orderItemsID;
     }
 
     public void setStatus(String status) {
@@ -104,20 +97,21 @@ public class Order implements Serializable {
                 ", orderDate=" + orderDate +
                 ", totalPrice=" + totalPrice +
                 ", status='" + status + '\'' +
-                ", orderItems=" + orderItems +
+                ", orderItemsID=" + orderItemsID +
                 '}';
     }
 
     public static class Builder {
-        private String orderID;
+        private String  orderID;
         private String customerID;
         private String addressID;
         private LocalDateTime orderDate;
         private double totalPrice;
         private String status;
-        private List<OrderItem> orderItems;
+        private String orderItemsID;
 
-        public Builder setOrderID(String orderID) {
+
+        public Builder setOrderID(String  orderID) {
             this.orderID = orderID;
             return this;
         }
@@ -142,16 +136,26 @@ public class Order implements Serializable {
             return this;
         }
 
+
         public Builder setStatus(String status) {
             this.status = status;
             return this;
         }
 
-        public Builder setOrderItems(List<OrderItem> orderItems) {
-            this.orderItems = orderItems;
+        public Builder setOrderItemsID(String orderItemsID) {
+            this.orderItemsID = orderItemsID;
             return this;
         }
-
+        public Builder copy(Order order) {
+            this.orderID = order.orderID;
+            this.customerID = order.customerID;
+            this.addressID = order.addressID;
+            this.orderDate = order.orderDate;
+            this.totalPrice = order.totalPrice;
+            this.orderItemsID = order.orderItemsID;
+            this.status = order.status;
+            return this;
+        }
         public Order build() {
             return new Order(this);
         }

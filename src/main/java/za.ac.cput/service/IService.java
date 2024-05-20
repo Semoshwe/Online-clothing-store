@@ -6,9 +6,10 @@ package za.ac.cput.service;
  * Date: 18 May 2024
  */
 import java.util.List;
+@Deprecated
 public interface IService<T, ID> {
     T create(T t);
-    static T read(ID id);
+     T read(ID id);
     T update(T t);
     List<T> getAll();
 }

@@ -21,7 +21,7 @@ import java.util.List;
         }
 
         @GetMapping("/read/{id}")
-        public Order read(@PathVariable Long id){
+        public Order read(@PathVariable String  id){
             return orderService.read(id);
         }
 

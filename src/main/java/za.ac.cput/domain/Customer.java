@@ -137,7 +137,7 @@ public class Customer implements Serializable {
             return this;
         }
 
-        public Builder copy(Customer customer) {
+        public  Builder copy(Customer customer) {
             this.customerId = customer.customerId;
             this.privileges = customer.privileges;
             this.userID = customer.userID;

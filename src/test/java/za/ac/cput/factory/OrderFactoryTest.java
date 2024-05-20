@@ -15,27 +15,17 @@ public class OrderFactoryTest {
     @Test
     public void testCreateOrder() {
         // Creating test data
-        Long orderID = 11111113445L;
+        String  orderID = "11111113445L";
         String customerID = "1001";
         LocalDateTime orderDate = LocalDateTime.now();
 
-        List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem.Builder()
-                .setOrderItemId("item1")
-                .setQuantity(2)
-                .setPrice(50.0)
-                .build());
-        orderItems.add(new OrderItem.Builder()
-                .setOrderItemId("item2")
-                .setQuantity(1)
-                .setPrice(100.0)
-                .build());
+        String orderItemsID = "12345";
 
         double totalPrice = 150.0;
         String status = "Pending";
         String addressID = "A100";
 
-        Order order = OrderFactory.createOrder(orderID, customerID, orderDate, orderItems, totalPrice, status, addressID);
+        Order order = OrderFactory.createOrder(orderID, customerID, orderDate, orderItemsID, totalPrice, status, addressID);
 
         // Asserting that the created order is not null
         assertNotNull(order);
@@ -44,7 +34,7 @@ public class OrderFactoryTest {
         assertEquals(orderID, order.getOrderID());
         assertEquals(customerID, order.getCustomerID());
         assertEquals(orderDate, order.getOrderDate());
-        assertEquals(orderItems, order.getOrderItems());
+        assertEquals(orderItemsID, order.getOrderItems());
         assertEquals(totalPrice, order.getTotalPrice());
     }
 }
