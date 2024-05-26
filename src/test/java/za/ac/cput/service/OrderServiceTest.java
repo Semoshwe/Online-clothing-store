@@ -1,8 +1,11 @@
 package za.ac.cput.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Customer;
 import za.ac.cput.domain.Order;
 import za.ac.cput.domain.OrderItem;
@@ -14,6 +17,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.class)
 class OrderServiceTest {
 
     @Autowired
@@ -46,7 +51,7 @@ class OrderServiceTest {
 
     @Test
     void read() {
-        Order read = OrderService.read(order.getOrderID());
+        Order read = orderService.read(order.getOrderID());
         assertNotNull(read);
         System.out.println(read);
     }

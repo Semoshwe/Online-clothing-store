@@ -11,7 +11,7 @@ import java.util.List;
     @RestController
     @RequestMapping("/order")
     public class OrderController {
-
+    /*
         @Autowired
         private OrderService orderService;
 
@@ -34,5 +34,7 @@ import java.util.List;
         public List<Order> getAll(){
             return orderService.getAll();
         }
+
+     */
     }
 

@@ -8,7 +8,7 @@ import za.ac.cput.repository.OrderRepository;
 import java.util.List;
 
 @Service
-public abstract class OrderService implements IOrderService {
+public class OrderService implements IOrderService {
     private final OrderRepository repository;
 
     @Autowired

@@ -20,10 +20,10 @@ public class CartFactory {
                 totalAmpount == 0 || Helper.isNullOrEmpty(cartItems.toString()))
             return null;
 
-        return new Cart.Builder().setcartID(cartID)
-                .setcustomerID(customerID)
-                .settotalAmount(totalAmpount)
-                .setcartItems(cartItems)
+        return new Cart.Builder().setCartID(cartID)
+                .setCustomerID(customerID)
+                .setTotalAmount(totalAmpount)
+                .setCartItems(cartItems)
                 .build();
     }
 }

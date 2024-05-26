@@ -17,7 +17,7 @@ public class Customer implements Serializable {
     @JoinColumn(name = "userID", insertable = false, updatable = false)
     private User user;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerID", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
     @OneToOne(cascade = CascadeType.ALL)

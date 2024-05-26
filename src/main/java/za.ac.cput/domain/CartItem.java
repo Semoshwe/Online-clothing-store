@@ -22,11 +22,11 @@ public class CartItem {
 
     protected CartItem(){};
 
-    private CartItem(Builder buildr){
-        this.cartItemID = buildr.cartItemID;
-        this.cartID = buildr.cartID;
-        this.productID = buildr.productID;
-        this.price = buildr.price;
+    private CartItem(Builder builder){
+        this.cartItemID = builder.cartItemID;
+        this.cartID = builder.cartID;
+        this.productID = builder.productID;
+        this.price = builder.price;
     }
     public String getCartItemID() {
         return cartItemID;
