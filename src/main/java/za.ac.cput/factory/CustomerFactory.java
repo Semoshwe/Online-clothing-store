@@ -17,18 +17,18 @@ public class CustomerFactory {
      */
 
 
-    public static Customer createCustomer(String customerId, String privileges, String  user) {
+    public static Customer createCustomer(String  customerId, String privileges, String  userID) {
 
         if (Helper.isNullOrEmpty(customerId) ||
                 Helper.isNullOrEmpty(privileges) ||
-                Helper.isNullOrEmpty(user)) {
+                Helper.isNullOrEmpty(userID)) {
             return null;
         }
 
         return new Customer.Builder()
                 .setCustomerId(customerId)
                 .setPrivileges(privileges)
-                .setUserID(user)
+                .setUserID(userID)
                 .build();
     }
 }

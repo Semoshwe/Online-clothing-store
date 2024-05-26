@@ -22,5 +22,5 @@ public interface CustomerRepo extends IRepository<Customer, String> {
 
     boolean delete(String customerId);
 
-    List<Customer> getall();
+
 }

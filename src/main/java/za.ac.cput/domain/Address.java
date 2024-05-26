@@ -2,17 +2,21 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
-import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-public class Address /*implements Serializable*/ {
+public class Address  {
+
     @Id
     private String addressID;
     private String street;
     private String city;
     private String province;
     private String zipCode;
+    @OneToOne
+    private User user;
 
     protected Address() {
     }
@@ -29,40 +33,33 @@ public class Address /*implements Serializable*/ {
         return addressID;
     }
 
-    public void setAddressID(String addressID) {
-        this.addressID = addressID;
-    }
-
     public String getStreet() {
         return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getProvince() {
         return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(addressID, address.addressID) && Objects.equals(street, address.street) && Objects.equals(city, address.city) && Objects.equals(province, address.province) && Objects.equals(zipCode, address.zipCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressID, street, city, province, zipCode);
     }
 
     @Override
@@ -75,6 +72,8 @@ public class Address /*implements Serializable*/ {
                 ", zipCode='" + zipCode + '\'' +
                 '}';
     }
+
+
 
     public static class Builder {
         private String addressID;
@@ -122,3 +121,5 @@ public class Address /*implements Serializable*/ {
         }
     }
 }
+
+

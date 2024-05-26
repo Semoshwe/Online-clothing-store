@@ -9,30 +9,30 @@ import za.ac.cput.repository.AdminRepository;
 import java.util.List;
 @Service
 public class AddressService implements IAddressService{
-    private AddressRepository addressrepository;
+    private AddressRepository repository;
 
     @Autowired
-    AddressService(AddressRepository addressrepository) {
-        this.addressrepository = addressrepository;
-    }
+    AddressService(AddressRepository repository) {this.repository = repository;}
 
     @Override
     public Address create(Address address) {
-        return addressrepository.save(address);
+        return repository.save(address);
     }
 
     @Override
-    public Address read(String id) {
-        return addressrepository.findAddressByAddressID(id);
+    public Address read(String s) {
+        return this.repository.findAddressByAddressID(s);
     }
 
     @Override
     public Address update(Address address) {
-        return addressrepository.save(address);
+        return repository.save(address);
     }
 
     @Override
     public List<Address> getAll() {
-        return addressrepository.findAll();
+        return repository.findAll();
     }
+
+
 }

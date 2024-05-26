@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface IProductRepository extends JpaRepository<Product, String> {
-    List<Product> getAll();
 }

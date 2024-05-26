@@ -13,5 +13,4 @@ import za.ac.cput.domain.ProductReview;
 import java.util.List;
 
 public interface IProductReviewRepository extends IRepository<ProductReview, String>{
-    List<ProductReview> getAll();
 }

@@ -11,7 +11,5 @@ import java.util.List;
  * Date: 17 May 2024
  */
 public interface IOrderRepository extends IRepository<Order, String>{
-        List<Order> getAll();
-
 
 }

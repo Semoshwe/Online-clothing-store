@@ -15,17 +15,12 @@ public class Cart {
     @Id
     private String cartID;
     private String customerID;
-    /*
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "cartItems", joinColumns = @JoinColumn(name = "Cart_id"))
-    @Column(name = "cartItem", nullable = false)
-    */
+
     @ElementCollection
     @CollectionTable(
             name="CartItem",
-            joinColumns=@JoinColumn(name="CartItemId")
+            joinColumns=@JoinColumn(name="cart_id")
     )
-    @Column(name="Cart_Items")
     private List<CartItem> cartItems;
     private double totalAmount;
 

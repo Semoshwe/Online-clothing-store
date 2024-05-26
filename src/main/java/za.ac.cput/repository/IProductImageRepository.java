@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface IProductImageRepository extends JpaRepository<ProductImage, String> {
-    List<ProductImage> getAll();
 }

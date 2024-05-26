@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")
 public class Order implements Serializable {
     @Id
     private String orderID;
@@ -36,7 +37,7 @@ public class Order implements Serializable {
         this.orderItems = builder.orderItems;
     }
 
-    public String getOrderID() {
+    public Long getOrderID() {
         return orderID;
     }
 

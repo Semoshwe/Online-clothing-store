@@ -27,7 +27,7 @@ public class OrderFactory {
      * @param addressID    The ID of the address where the order should be delivered.
      * @return             The created Order object, or null if any parameter is null or empty.
      */
-    public static Order createOrder(String orderID, String customerID, LocalDateTime orderDate,
+    public static Order createOrder(Long orderID, String customerID, LocalDateTime orderDate,
                                     List<OrderItem> orderItems, double totalPrice, String status,
                                     String addressID) {
 

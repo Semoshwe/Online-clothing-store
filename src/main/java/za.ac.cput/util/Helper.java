@@ -13,6 +13,11 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class Helper {
+
+    private static String EMAIL_REGEX ="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+    private static Pattern EMAIL_PATTERN =  Pattern.compile(EMAIL_REGEX);
+
+
     public static String generateId() {
         return UUID.randomUUID().toString();
     }
@@ -33,9 +38,12 @@ public class Helper {
     public static boolean isValidRange(int rating) {
         return rating >= 1 && rating <= 5;
     }
-    public static boolean isEmailValid(String email, String regex){
-        return Pattern.compile(regex)
-                .matcher(email)
-                .matches();
+    public static boolean isEmailValid(String emailAddress){
+        return EMAIL_PATTERN.matcher(emailAddress).matches();
+    }
+
+
+    public static boolean isNullOrEmpty(Long l) {
+        return l == null;
     }
 }

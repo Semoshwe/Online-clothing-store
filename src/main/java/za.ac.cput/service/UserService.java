@@ -4,37 +4,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.User;
+import za.ac.cput.repository.AddressRepository;
 import za.ac.cput.repository.UserRepository;
 
 import java.util.List;
 
 @Service
-//@Configuration
 public class UserService implements IUserService {
-    private UserRepository userrepository;
-
+    private AddressRepository addressrepository;
+    private UserRepository repository;
     @Autowired
-    UserService(UserRepository userrepository) {
-        this.userrepository = userrepository;
+
+    public UserService(AddressRepository addressrepository, UserRepository repository) {
+        this.addressrepository = addressrepository;
+        this.repository = repository;
     }
 
     @Override
     public User create(User user) {
-        return userrepository.save(user);
+        addressrepository.save(user.getAddress());
+        return repository.save(user);
     }
 
     @Override
-    public User read(String id) {
-        return userrepository.findUserbyUserId(id);
+    public User read(String s) {
+        return repository.findUserbyUserId(s);
     }
 
     @Override
     public User update(User user) {
-        return userrepository.save(user);
+        addressrepository.save(user.getAddress());
+        return repository.save(user);
     }
 
     @Override
     public List<User> getAll() {
-        return userrepository.findAll();
+        return repository.findAll();
     }
 }

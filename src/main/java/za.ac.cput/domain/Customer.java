@@ -24,7 +24,7 @@ public class Customer implements Serializable {
     @JoinColumn(name = "addressID", insertable = false, updatable = false)
     private Address address;
 
-    protected Customer() {
+    public Customer() {
     }
 
     private Customer(Builder builder) {
@@ -117,7 +117,7 @@ public class Customer implements Serializable {
         private String userID;
         private List<Order> orders;
 
-        public Builder setCustomerId(String customerId) {
+        public Builder setCustomerId(String  customerId) {
             this.customerId = customerId;
             return this;
         }

@@ -9,16 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserFactoryTest {
     @Test
     void buildUser() {
-        Address address = new Address.Builder()
-                .setAddressID("12345")
-                .setStreet("Main Street")
-                .setCity("Cape Town")
-                .setProvince("Western Cape")
-                .setZipCode("8000")
-                .build();
+//        Address address = new Address.Builder()
+//                .setAddressID("12345")
+//                .setStreet("Main Street")
+//                .setCity("Cape Town")
+//                .setProvince("Western Cape")
+//                .setZipCode("8000")
+//                .build();
 
 
-        User user = UserFactory.buildUser("I7I775", "Nicole", "Smith", "password123", "nicole@example.com", address,"115445");
+        User user = UserFactory.buildingUser("I7I775", "Nicole", "Smith", "password123", "nicole@example.com", "0076","Dorset","Joburg","Gauteng","7925");
 
 
         assertNotNull(user);
