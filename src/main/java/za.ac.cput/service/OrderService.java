@@ -8,8 +8,8 @@ import za.ac.cput.repository.OrderRepository;
 import java.util.List;
 
 @Service
-public abstract class OrderService implements IOrderService {
-    private OrderRepository repository;
+public class OrderService implements IOrderService {
+    private final OrderRepository repository;
 
     @Autowired
     public OrderService(OrderRepository repository) {
@@ -23,7 +23,7 @@ public abstract class OrderService implements IOrderService {
 
 
     @Override
-    public static Order read(Long id) {
+    public  Order read(String id) {
         return repository.findById(id).orElse(null);
     }
 

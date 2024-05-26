@@ -1,6 +1,13 @@
 package za.ac.cput.service;
-
+/**
+ * E-Commerce Web Application for selling clothes
+ * CartItemServiceTest.java
+ * Test class for CartItemService
+ * Author: Kinzonzi Genereux Mukoko - 221477934
+ * Date: 18 May 2024
+ * */
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +22,9 @@ class CartItemServiceTest {
     @Autowired
     private CartItemService cartItemService;
 
-    private CartItem cartItem;
+    private static CartItem cartItem;
     @Test
+    @Order(1)
     void setUp() {
         cartItem = CartItemFactory.buildCart("9917","6677","2245",46.90);
         assertNotNull(cartItem);
@@ -24,12 +32,14 @@ class CartItemServiceTest {
     }
 
     @Test
+    @Order(2)
     void create() {
         CartItem create = cartItemService.create(cartItem);
         assertNotNull(create);
         System.out.println(create);
     }
     @Test
+    @Order(3)
     void read() {
         CartItem read = cartItemService.read(cartItem.getCartItemID());
         assertNotNull(read);
@@ -37,6 +47,7 @@ class CartItemServiceTest {
     }
 
     @Test
+    @Order(5)
     void update() {
         CartItem newCartItem = new CartItem.Builder().copy(cartItem).setCartItemID("2000").build();
         CartItem updated = cartItemService.update(newCartItem);
@@ -45,6 +56,7 @@ class CartItemServiceTest {
     }
 
     @Test
+    @Order(6)
     void getAll() {
         System.out.println(cartItemService.getAll());
     }

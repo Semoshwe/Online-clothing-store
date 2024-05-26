@@ -1,8 +1,11 @@
 package za.ac.cput.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Customer;
 import za.ac.cput.domain.Order;
 import za.ac.cput.domain.OrderItem;
@@ -14,37 +17,28 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.class)
 class OrderServiceTest {
 
-
+    @Autowired
     private OrderService orderService;
 
 
     private Order order;
+
     @BeforeEach
     void setUp() {
         // Creating test data
-        Long orderID = 11111113445L;
+        String orderID = "11111113445L";
         String customerID = "1001";
         LocalDateTime orderDate = LocalDateTime.now();
-
-        List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem.Builder()
-                .setOrderItemId("item1")
-                .setQuantity(2)
-                .setPrice(50.0)
-                .build());
-        orderItems.add(new OrderItem.Builder()
-                .setOrderItemId("item2")
-                .setQuantity(1)
-                .setPrice(100.0)
-                .build());
-
+        String orderItemsID = "1234";
         double totalPrice = 150.0;
         String status = "Pending";
         String addressID = "A100";
 
-        Order order = OrderFactory.createOrder(orderID, customerID, orderDate, orderItems, totalPrice, status, addressID);
+        Order order = OrderFactory.createOrder(orderID, customerID, orderDate, orderItemsID, totalPrice, status, addressID);
 
     }
 
@@ -57,7 +51,7 @@ class OrderServiceTest {
 
     @Test
     void read() {
-        Order read = OrderService.read(order.getOrderID());
+        Order read = orderService.read(order.getOrderID());
         assertNotNull(read);
         System.out.println(read);
     }

@@ -11,7 +11,7 @@ import java.util.List;
     @RestController
     @RequestMapping("/order")
     public class OrderController {
-
+    /*
         @Autowired
         private OrderService orderService;
 
@@ -21,7 +21,7 @@ import java.util.List;
         }
 
         @GetMapping("/read/{id}")
-        public Order read(@PathVariable Long id){
+        public Order read(@PathVariable String  id){
             return orderService.read(id);
         }
 
@@ -34,5 +34,7 @@ import java.util.List;
         public List<Order> getAll(){
             return orderService.getAll();
         }
+
+     */
     }
 

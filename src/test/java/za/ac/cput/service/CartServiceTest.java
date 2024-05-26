@@ -1,5 +1,11 @@
 package za.ac.cput.service;
-
+/**
+ * E-Commerce Web Application for selling clothes
+ * CartServiceTest.java
+ * Test class for CartService
+ * Author: Kinzonzi Genereux Mukoko - 221477934
+ * Date: 18 May 2024
+ * */
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -10,6 +16,7 @@ import za.ac.cput.domain.CartItem;
 import za.ac.cput.factory.CartFactory;
 import za.ac.cput.factory.CartItemFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,10 +25,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class CartServiceTest {
     @Autowired
     private CartService cartService;
-    private Cart cart;
-    private CartItem cartItem;
+    private static Cart cart;
+    private static CartItem cartItem;
 
-    private List<CartItem> list;
+    private static List<CartItem> list = new ArrayList<>();
     @Test
     void setUp() {
         cartItem = CartItemFactory.buildCart("9917","6677","2245",46.90);
@@ -47,7 +54,7 @@ class CartServiceTest {
 
     @Test
     void update() {
-        Cart newCart = new Cart.Builder().copy(cart).settotalAmount(47.00).build();
+        Cart newCart = new Cart.Builder().copy(cart).setTotalAmount(47.00).build();
         Cart updated = cartService.update(newCart);
         assertNotNull(updated);
         System.out.println(updated);

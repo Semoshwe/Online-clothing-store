@@ -17,7 +17,7 @@ public class Customer implements Serializable {
     @JoinColumn(name = "userID", insertable = false, updatable = false)
     private User user;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerID", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -137,7 +137,7 @@ public class Customer implements Serializable {
             return this;
         }
 
-        public Builder copy(Customer customer) {
+        public  Builder copy(Customer customer) {
             this.customerId = customer.customerId;
             this.privileges = customer.privileges;
             this.userID = customer.userID;
