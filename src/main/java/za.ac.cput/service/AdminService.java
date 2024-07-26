@@ -22,14 +22,14 @@ public class AdminService implements IAdminService {
     AdminService(AdminRepository repository) {this.repository = repository;}
 
     @Override
-    public Admin create(Admin admin) {return repository.save(admin);}
+    public Admin create(Admin admin) {return this.repository.save(admin);}
 
     @Override
-    public Admin read(String adminId) {return repository.findById(adminId).orElse(null);}
+    public Admin read(String adminId) {return this.repository.findById(adminId).orElse(null);}
 
     @Override
-    public Admin update(Admin admin) {return repository.save(admin);}
+    public Admin update(Admin admin) {return this.repository.save(admin);}
 
     @Override
-    public List<Admin> findAll() {return repository.findAll();}
+    public List<Admin> findAll() {return this.repository.findAll();}
 }

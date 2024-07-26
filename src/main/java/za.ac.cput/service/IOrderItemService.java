@@ -9,5 +9,5 @@ import za.ac.cput.domain.OrderItem;
  * Date: 19 May 2024
  */
 
-public interface IOrderItemService extends IService<OrderItem, Long> {
+public interface IOrderItemService extends IService<OrderItem, String> {
 }

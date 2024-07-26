@@ -23,14 +23,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderItemControllerTest {
+
     @Autowired
     private TestRestTemplate restTemplate;
-    private final String BASE_URL = "http://localhost:8080/shopping_store_db/order/orderitem";
+    private final String BASE_URL = "http://localhost:8080/shopping_store/orderitem";
     private static OrderItem orderItem;
 
     @BeforeAll
     public static void setUp() {
-        orderItem = OrderItemFactory.buildOrderItem("PC5211", 5, 9.99);
+        orderItem = OrderItemFactory.buildOrderItem("9","PC5211", 5, 9.99);
     }
 
     @Test
@@ -38,15 +39,17 @@ class OrderItemControllerTest {
     void create() {
         String url = BASE_URL + "/create";
         ResponseEntity<OrderItem> postResponse = restTemplate.postForEntity(url, orderItem, OrderItem.class);
+        assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
-        assertEquals(orderItem.getOrderItemId(), postResponse.getBody().getOrderItemId());
-        System.out.println(postResponse.getBody());
+        OrderItem orderItemSaved = postResponse.getBody();
+        assertEquals(orderItem.getOrderItemId(), orderItemSaved.getOrderItemId());
+        System.out.println(orderItemSaved);
     }
 
     @Test
     @Order(2)
     void read() {
-        String url = BASE_URL + "/read" + orderItem.getOrderItemId();
+        String url = BASE_URL + "/read/" + orderItem.getOrderItemId();
         ResponseEntity<OrderItem> response = restTemplate.getForEntity(url, OrderItem.class);
         assertEquals(orderItem.getOrderItemId(), response.getBody().getOrderItemId());
         System.out.println(response.getBody());

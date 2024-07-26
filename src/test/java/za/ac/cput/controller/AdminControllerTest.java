@@ -23,9 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AdminControllerTest {
+
     @Autowired
     private TestRestTemplate restTemplate;
-    private final String BASE_URL = "http://localhost:8080/shopping_store_db/admin";
+    private final String BASE_URL = "http://localhost:8080/shopping_store/admin";
     private static Admin admin;
 
     @BeforeAll
@@ -38,15 +39,17 @@ class AdminControllerTest {
     void create() {
         String url = BASE_URL + "/create";
         ResponseEntity<Admin> postResponse = restTemplate.postForEntity(url, admin, Admin.class);
+        assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
-        assertEquals(admin.getAdminId(), postResponse.getBody().getAdminId());
-        System.out.println(postResponse.getBody());
+        Admin adminSaved = postResponse.getBody();
+        assertEquals(admin.getAdminId(), adminSaved.getAdminId());
+        System.out.println(adminSaved);
     }
 
     @Test
     @Order(2)
     void read() {
-        String url = BASE_URL + "/read" + admin.getAdminId();
+        String url = BASE_URL + "/read/" + admin.getAdminId();
         ResponseEntity<Admin> response = restTemplate.getForEntity(url, Admin.class);
         assertEquals(admin.getAdminId(), response.getBody().getAdminId());
         System.out.println(response.getBody());
@@ -67,6 +70,7 @@ class AdminControllerTest {
     @Order(4)
     void getAll() {
         String url = BASE_URL + "/getall";
+        System.out.println("URL: " + url);
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity,  String.class);
