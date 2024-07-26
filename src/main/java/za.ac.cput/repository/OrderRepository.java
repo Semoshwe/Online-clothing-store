@@ -1,11 +1,7 @@
 package za.ac.cput.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import za.ac.cput.domain.Order;
-
-import java.util.List;
-import java.util.Optional;
+import za.ac.cput.domain.Orders;
 
 
 /*
@@ -16,16 +12,16 @@ import java.util.Optional;
  * Date: 17 May 2024
  */
 //@Repository
-public interface OrderRepository extends JpaRepository<Order, String> {
+public interface OrderRepository extends JpaRepository<Orders, String> {
 /*
-    List<Order> getall();
+    List<Orders> getall();
 
-    Order save(Order order);
+    Orders save(Orders order);
 
-    //List<Order> findById(Long id);
-   Optional<Order> findById(String id);
+    //List<Orders> findById(Long id);
+   Optional<Orders> findById(String id);
 
-    List<Order> findAll();
+    List<Orders> findAll();
 
  */
 }

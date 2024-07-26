@@ -2,24 +2,23 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Objects;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "orders")
-public class Order implements Serializable {
+public class Orders implements Serializable {
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String orderID;
     private String customerID;
     private String addressID;
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
     private double totalPrice;
     private String status;
     private String orderItemsID;
 
-    public Order() {}
+    public Orders() {}
 
-    public Order(Builder builder) {
+    public Orders(Builder builder) {
         this.orderID = builder.orderID;
         this.customerID = builder.customerID;
         this.addressID = builder.addressID;
@@ -29,7 +28,7 @@ public class Order implements Serializable {
         this.orderItemsID = builder.orderItemsID;
     }
 
-    public String getOrderID() {
+    public String  getOrderID() {
         return orderID;
     }
 
@@ -41,7 +40,7 @@ public class Order implements Serializable {
         return addressID;
     }
 
-    public LocalDateTime getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
@@ -64,14 +63,18 @@ public class Order implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order order)) return false;
-        if (Double.compare(order.getTotalPrice(), getTotalPrice()) != 0) return false;
-        if (!Objects.equals(getOrderID(), order.getOrderID())) return false;
-        if (!Objects.equals(getCustomerID(), order.getCustomerID())) return false;
-        if (!Objects.equals(getAddressID(), order.getAddressID())) return false;
-        if (!Objects.equals(getOrderDate(), order.getOrderDate())) return false;
-        if (!Objects.equals(getStatus(), order.getStatus())) return false;
-        return Objects.equals(getOrderItemsID(), order.getOrderItemsID());
+        if (!(o instanceof Orders orders)) return false;
+
+        if (getOrderID() != orders.getOrderID()) return false;
+        if (Double.compare(getTotalPrice(), orders.getTotalPrice()) != 0) return false;
+        if (getCustomerID() != null ? !getCustomerID().equals(orders.getCustomerID()) : orders.getCustomerID() != null)
+            return false;
+        if (getAddressID() != null ? !getAddressID().equals(orders.getAddressID()) : orders.getAddressID() != null)
+            return false;
+        if (getOrderDate() != null ? !getOrderDate().equals(orders.getOrderDate()) : orders.getOrderDate() != null)
+            return false;
+        if (getStatus() != null ? !getStatus().equals(orders.getStatus()) : orders.getStatus() != null) return false;
+        return getOrderItemsID() != null ? getOrderItemsID().equals(orders.getOrderItemsID()) : orders.getOrderItemsID() == null;
     }
 
     @Override
@@ -91,7 +94,7 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Orders{" +
                 "orderID='" + orderID + '\'' +
                 ", customerID='" + customerID + '\'' +
                 ", addressID='" + addressID + '\'' +
@@ -106,7 +109,7 @@ public class Order implements Serializable {
         private String orderID;
         private String customerID;
         private String addressID;
-        private LocalDateTime orderDate;
+        private LocalDate orderDate;
         private double totalPrice;
         private String status;
         private String orderItemsID;
@@ -126,7 +129,7 @@ public class Order implements Serializable {
             return this;
         }
 
-        public Builder setOrderDate(LocalDateTime orderDate) {
+        public Builder setOrderDate(LocalDate orderDate) {
             this.orderDate = orderDate;
             return this;
         }
@@ -146,19 +149,19 @@ public class Order implements Serializable {
             return this;
         }
 
-        public Builder copy(Order order) {
-            this.orderID = order.orderID;
-            this.customerID = order.customerID;
-            this.addressID = order.addressID;
-            this.orderDate = order.orderDate;
-            this.totalPrice = order.totalPrice;
-            this.status = order.status;
-            this.orderItemsID = order.orderItemsID;
+        public Builder copy(Orders orders) {
+            this.orderID = orders.orderID;
+            this.customerID = orders.customerID;
+            this.addressID = orders.addressID;
+            this.orderDate = orders.orderDate;
+            this.totalPrice = orders.totalPrice;
+            this.status = orders.status;
+            this.orderItemsID = orders.orderItemsID;
             return this;
         }
 
-        public Order build() {
-            return new Order(this);
+        public Orders build() {
+            return new Orders(this);
         }
     }
 }
