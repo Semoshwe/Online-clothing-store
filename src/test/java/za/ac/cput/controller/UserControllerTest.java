@@ -30,7 +30,7 @@ class EmployeeControllerTest {
 
     @BeforeAll
     public static void setup(){
-        user = UserFactory.buildingUser("UD666", "Semoshwe", "Mapokgole", "peoplelll", "moshwe2@gmail.com", "00567","Low Str","Woodstock","Gauteng","2390");
+        user = UserFactory.createUser("UD666", "Semoshwe", "Mapokgole", "peoplelll", "moshwe2@gmail.com", "00567","Low Str");
     }
 
     @Test

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Address;
 import za.ac.cput.repository.AddressRepository;
-import za.ac.cput.repository.AdminRepository;
 
 import java.util.List;
 @Service

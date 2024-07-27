@@ -34,8 +34,8 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     // Find customers by user ID
     List<Customer> findByUserID(String userID);
 
-    // Custom query to find customers who have placed orders (assuming there is an Order table with a customerId field)
-    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Order o)")
+    // Custom query to find customers who have placed orders (assuming there is an Orders table with a customerId field)
+    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Orders o)")
     List<Customer> findCustomersWithOrders();
 
     // Pagination and sorting for customers with specific privileges
@@ -48,15 +48,15 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     int updateCustomerPrivileges(@Param("customerId") String customerId, @Param("privileges") String privileges);
 
     // Custom query to find customers by their order status
-    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Order o WHERE o.status = :status)")
+    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Orders o WHERE o.status = :status)")
     List<Customer> findCustomersByOrderStatus(@Param("status") String status);
 
     // Custom query to find customers with orders above a certain total price
-    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Order o WHERE o.totalPrice > :price)")
+    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Orders o WHERE o.totalPrice > :price)")
     List<Customer> findCustomersByOrderTotalPrice(@Param("price") double price);
 
     // Custom query to find customers who placed orders within a date range
-    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Order o WHERE o.orderDate BETWEEN :startDate AND :endDate)")
+    @Query("SELECT c FROM Customer c WHERE c.customerId IN (SELECT o.customerID FROM Orders o WHERE o.orderDate BETWEEN :startDate AND :endDate)")
     List<Customer> findCustomersByOrderDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
 

@@ -18,7 +18,7 @@ public class Customer implements Serializable {
     private User user;
 
     @OneToMany(mappedBy = "customerID", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orders;
+    private List<Orders> orders;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressID", insertable = false, updatable = false)
@@ -66,11 +66,11 @@ public class Customer implements Serializable {
         this.user = user;
     }
 
-    public List<Order> getOrders() {
+    public List<Orders> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<Orders> orders) {
         this.orders = orders;
     }
 
@@ -115,7 +115,7 @@ public class Customer implements Serializable {
         private String customerId;
         private String privileges;
         private String userID;
-        private List<Order> orders;
+        private List<Orders> orders;
 
         public Builder setCustomerId(String  customerId) {
             this.customerId = customerId;
@@ -132,7 +132,7 @@ public class Customer implements Serializable {
             return this;
         }
 
-        public Builder setOrders(List<Order> orders) {
+        public Builder setOrders(List<Orders> orders) {
             this.orders = orders;
             return this;
         }
