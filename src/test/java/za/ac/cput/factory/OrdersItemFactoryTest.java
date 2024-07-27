@@ -17,7 +17,7 @@ class OrderItemFactoryTest {
 
     @Test
     void buildOrderItem() {
-        OrderItem orderItem = OrderItemFactory.buildOrderItem("PC9775", 5, 9.99);
+        OrderItem orderItem = OrderItemFactory.buildOrderItem("9","PC9775", 5, 9.99);
 
         assertNotNull(orderItem);
         System.out.println(orderItem);

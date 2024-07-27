@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Admin;
 import za.ac.cput.service.AdminService;
-
 import java.util.List;
 
 /*
@@ -15,7 +14,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/Admin")
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private AdminService adminService;

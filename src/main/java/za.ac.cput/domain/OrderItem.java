@@ -1,28 +1,26 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
-
-import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-@Embeddable
-public class OrderItem implements Serializable {
+public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String orderItemId;
     private int quantity;
     private double price;
 
-    public OrderItem() {}
+    protected OrderItem() {}
 
-    private OrderItem(Builder builder) {
+    public OrderItem(Builder builder) {
+        this.id = builder.id;
         this.orderItemId = builder.orderItemId;
         this.quantity = builder.quantity;
         this.price = builder.price;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -41,30 +39,20 @@ public class OrderItem implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderItem orderItem)) return false;
-
-        if (getQuantity() != orderItem.getQuantity()) return false;
-        if (Double.compare(getPrice(), orderItem.getPrice()) != 0) return false;
-        if (getId() != null ? !getId().equals(orderItem.getId()) : orderItem.getId() != null) return false;
-        return getOrderItemId() != null ? getOrderItemId().equals(orderItem.getOrderItemId()) : orderItem.getOrderItemId() == null;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return quantity == orderItem.quantity && Double.compare(price, orderItem.price) == 0 && Objects.equals(id, orderItem.id) && Objects.equals(orderItemId, orderItem.orderItemId);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getOrderItemId() != null ? getOrderItemId().hashCode() : 0);
-        result = 31 * result + getQuantity();
-        temp = Double.doubleToLongBits(getPrice());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        return Objects.hash(id, orderItemId, quantity, price);
     }
 
     @Override
     public String toString() {
         return "OrderItem{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", orderItemId='" + orderItemId + '\'' +
                 ", quantity=" + quantity +
                 ", price=" + price +
@@ -72,9 +60,15 @@ public class OrderItem implements Serializable {
     }
 
     public static class Builder {
+        private String id;
         private String orderItemId;
         private int quantity;
         private double price;
+
+        public Builder setId(String id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder setOrderItemId(String orderItemId) {
             this.orderItemId = orderItemId;
@@ -92,6 +86,7 @@ public class OrderItem implements Serializable {
         }
 
         public Builder copy(OrderItem orderItem) {
+            this.id = orderItem.getId();
             this.orderItemId = orderItem.orderItemId;
             this.quantity = orderItem.quantity;
             this.price = orderItem.price;
