@@ -24,7 +24,7 @@ class OrderItemServiceTest {
     @Autowired
     private OrderItemService service;
 
-    private OrderItem orderItem = OrderItemFactory.buildOrderItem("PC5211", 5, 9.99);
+    private OrderItem orderItem = OrderItemFactory.buildOrderItem("9","PC5211", 5, 9.99);
 
     @Test
     @Order(1)

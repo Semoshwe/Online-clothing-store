@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.OrderItem;
 import za.ac.cput.service.OrderItemService;
-
 import java.util.List;
 
 /*
@@ -26,9 +25,7 @@ public class OrderItemController {
     }
 
     @GetMapping("/read/{id}")
-    public OrderItem read(@PathVariable Long id){
-        return orderItemService.read(id);
-    }
+    public OrderItem read(@PathVariable String id){return orderItemService.read(id);}
 
     @PostMapping("/update")
     public OrderItem update(@RequestBody OrderItem orderItem){

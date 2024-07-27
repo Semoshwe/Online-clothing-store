@@ -11,14 +11,15 @@ import za.ac.cput.util.Helper;
  */
 
 public class OrderItemFactory {
-    public static OrderItem buildOrderItem(String orderItemId, int quantity, double price){
-        if (Helper.isNullOrEmpty(orderItemId))
+    public static OrderItem buildOrderItem(String id, String orderItemId, int quantity, double price){
+        if (Helper.isNullOrEmpty(orderItemId) || Helper.isNullOrEmpty(id))
             return null;
 
         if (quantity < 0 || price < 0)
             return null;
 
-        return new OrderItem.Builder().setOrderItemId(orderItemId)
+        return new OrderItem.Builder().setId(id)
+                .setOrderItemId(orderItemId)
                 .setQuantity(quantity)
                 .setPrice(price)
                 .build();
