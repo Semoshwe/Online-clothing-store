@@ -9,4 +9,9 @@ import za.ac.cput.domain.ProductImage;
 
 
 public interface IProductImageService extends IService<ProductImage, String>{
+    void deleteByID(String ID);
+
+    ProductImage findByImageID(String imageID);
+
+    ProductImage findByProductID(String productID);
 }
