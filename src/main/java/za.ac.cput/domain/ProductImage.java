@@ -1,5 +1,6 @@
 package za.ac.cput.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
@@ -14,7 +15,8 @@ public class ProductImage implements Serializable {
     private String imageID;
     private String productID;
     @Lob
-    private Blob image;
+    @Column(length=100000)
+    private byte[] image;
 
     protected ProductImage() {
 
@@ -34,7 +36,7 @@ public class ProductImage implements Serializable {
         return productID;
     }
 
-    public Blob getImage() {
+    public byte[] getImage() {
         return image;
     }
 
@@ -63,7 +65,7 @@ public class ProductImage implements Serializable {
     public static class Builder{
         private String imageID;
         private String productID;
-        private Blob image;
+        private byte[] image;
 
         public Builder setImageID(String imageID){
             this.imageID = imageID;
@@ -75,7 +77,7 @@ public class ProductImage implements Serializable {
             return this;
         }
 
-        public Builder setImage(Blob image){
+        public Builder setImage(byte[] image){
             this.image = image;
             return this;
         }

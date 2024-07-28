@@ -1,9 +1,9 @@
 package za.ac.cput.factory;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.*;
+import za.ac.cput.domain.ProductImage;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /*
  *Product:java
@@ -12,10 +12,43 @@ import org.junit.jupiter.api.Timeout;
  * Date: 26 March 2024
  */
 public class ProductImageFactoryTest {
+    private ProductImage productImage1, productImage2, productImage3;
 
     @BeforeEach
     void setUp(){
+        byte[] photo = new byte[0];
+        productImage1 = ProductImageFactory.createProductImage("1", photo);
 
+        productImage2 = ProductImageFactory.createProductImage("2", photo);
+
+        productImage3 = ProductImageFactory.createProductImage("3", photo);
+    }
+
+    @Test
+    @Order(2)
+    public void testNotEqual(){
+        System.out.println("Assert that productImage1: "+ productImage1+ "is not equal to productImage2: "+productImage2);
+        assertNotNull(productImage1);
+        assertNotNull(productImage2);
+        assertNotEquals(productImage1, productImage2);
+    }
+
+    @Test
+    @Order(1)
+    public void testEquality(){
+        System.out.println("Assert that productImage2: "+ productImage2+" is equal to productImage3: "+productImage3);
+        assertNotNull(productImage2);
+        assertNotNull(productImage3);
+        assertEquals(productImage2, productImage3);
+    }
+
+    @Test
+    @Order(3)
+    public void testIdentity(){
+        System.out.println("Testing the identity that productImage2: "+productImage2+" is the same as productImage3: "+productImage3);
+        assertNotNull(productImage2);
+        assertNotNull(productImage3);
+        assertSame(productImage2, productImage3);
     }
 
     @Test

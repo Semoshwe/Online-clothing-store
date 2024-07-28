@@ -11,7 +11,7 @@ import za.ac.cput.util.Helper;
 import java.sql.Blob;
 
 public class ProductImageFactory {
-    public static ProductImage createProductImage(String productID, Blob image){
+    public static ProductImage createProductImage(String productID, byte[] image){
         if(Helper.isNullOrEmpty(productID)){
             return null;
         }

@@ -54,6 +54,8 @@ public class ProductFactoryTest {
     @Order(2)
     public void testNotEqual(){
         System.out.println("Assert that product1: "+ product1+ "is not equal to product2: "+product2);
+        assertNotNull(product1);
+        assertNotNull(product2);
         assertNotEquals(product1, product2);
     }
 
@@ -61,6 +63,8 @@ public class ProductFactoryTest {
     @Order(1)
     public void testEquality(){
         System.out.println("Assert that product2: "+ product2+" is equal to pub3: "+product3);
+        assertNotNull(product2);
+        assertNotNull(product3);
         assertEquals(product2, product3);
     }
 
@@ -68,6 +72,8 @@ public class ProductFactoryTest {
     @Order(3)
     public void testIdentity(){
         System.out.println("Testing the identity that product2: "+product2+" is the same as product3: "+product3);
+        assertNotNull(product2);
+        assertNotNull(product3);
         assertSame(product2, product3);
     }
 

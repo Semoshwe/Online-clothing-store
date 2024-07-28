@@ -7,14 +7,14 @@ package za.ac.cput.service;
  */
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Product;
-import za.ac.cput.repository.IProductRepository;
+import za.ac.cput.repository.ProductRepository;
 
 import java.util.List;
 
 @Service
 public class ProductService implements IProductService{
     private static IProductService service = null;
-    private IProductRepository repository;
+    private ProductRepository repository;
 
     private ProductService(){
 
@@ -43,7 +43,22 @@ public class ProductService implements IProductService{
     }
 
     @Override
+    public void deleteByID(String ID) {
+        repository.deleteById(ID);
+    }
+
+    @Override
     public List<Product> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Product> findByDescription(String description) {
+        return repository.findByDescription(description);
+    }
+
+    @Override
+    public List<Product> findByName(String name) {
+        return repository.findByName(name);
     }
 }

@@ -7,7 +7,7 @@ package za.ac.cput.service;
  */
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.ProductImage;
-import za.ac.cput.repository.IProductImageRepository;
+import za.ac.cput.repository.ProductImageRepository;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductImageService implements IProductImageService {
 
     private static IProductImageService service = null;
-    private IProductImageRepository repository;
+    private ProductImageRepository repository;
 
     private ProductImageService(){
 
@@ -43,9 +43,22 @@ public class ProductImageService implements IProductImageService {
     }
 
     @Override
+    public void deleteByID(String ID) {
+        repository.deleteById(ID);
+    }
+
+    @Override
     public List<ProductImage> findAll() {
         return repository.findAll();
     }
 
+    @Override
+    public ProductImage findByImageID(String imageID) {
+        return repository.findByImageID(imageID);
+    }
 
+    @Override
+    public ProductImage findByProductID(String productID) {
+        return repository.findByProductID(productID);
+    }
 }
