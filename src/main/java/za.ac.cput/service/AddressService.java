@@ -32,7 +32,7 @@ public class AddressService implements IAddressService{
 
     @Override
     public List<Address> findAll() {
-        return null;
+        return repository.findAll();
     }
 
 }
