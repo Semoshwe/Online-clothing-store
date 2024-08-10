@@ -13,16 +13,11 @@ public class Customer implements Serializable {
 
     private String userID;
 
-    @OneToOne
-    @JoinColumn(name = "userID", insertable = false, updatable = false)
-    private User user;
+
 
     @OneToMany(mappedBy = "customerID", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Orders> orders;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "addressID", insertable = false, updatable = false)
-    private Address address;
 
     public Customer() {
     }
@@ -58,13 +53,7 @@ public class Customer implements Serializable {
         this.userID = userID;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public List<Orders> getOrders() {
         return orders;
@@ -74,13 +63,7 @@ public class Customer implements Serializable {
         this.orders = orders;
     }
 
-    public Address getAddress() {
-        return address;
-    }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -105,9 +88,7 @@ public class Customer implements Serializable {
                 "customerId='" + customerId + '\'' +
                 ", privileges='" + privileges + '\'' +
                 ", userID='" + userID + '\'' +
-                ", user=" + user +
                 ", orders=" + orders +
-                ", address=" + address +
                 '}';
     }
 

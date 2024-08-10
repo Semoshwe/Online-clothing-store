@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.Orders;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,7 @@ public class OrdersFactoryTest {
         // Creating test data
         String orderID = "11111113445L";
         String customerID = "1001";
-        LocalDate orderDate = LocalDate.now();
+        LocalDateTime orderDate = LocalDate.now().atStartOfDay();
 
         String orderItemsID = "12345";
 
