@@ -1,16 +1,20 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Orders implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String orderID;
     private String customerID;
     private String addressID;
+    @CreationTimestamp
     private LocalDate orderDate;
     private double totalPrice;
     private String status;
