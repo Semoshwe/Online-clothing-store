@@ -15,7 +15,7 @@ public class OrdersFactoryTest {
         // Creating test data
         String orderID = "11111113445L";
         String customerID = "1001";
-        LocalDateTime orderDate = LocalDate.now().atStartOfDay();
+        LocalDate orderDate = LocalDate.now();
 
         String orderItemsID = "12345";
 

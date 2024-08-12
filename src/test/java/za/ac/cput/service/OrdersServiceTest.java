@@ -28,7 +28,7 @@ class OrdersServiceTest {
         // Creating test data
         String orderID = "1L";
         String customerID = "1001";
-        LocalDateTime orderDate = LocalDate.now().atStartOfDay();
+        LocalDate orderDate = LocalDate.now();
         String orderItemsID = "1234";
         double totalPrice = 150.0;
         String status = "Pending";
