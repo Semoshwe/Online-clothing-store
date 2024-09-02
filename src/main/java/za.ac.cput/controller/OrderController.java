@@ -18,6 +18,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
+
     @PostMapping(value = "/create")
     public ResponseEntity<Orders> create(@RequestBody Orders orders) {
         Orders createdOrders = orderService.create(orders);
@@ -25,7 +27,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/read/{id}")
-    public ResponseEntity<Orders> read(@PathVariable String id) {
+    public ResponseEntity<Orders> read(@PathVariable String id, @RequestParam String customerId) {
         Orders orders = orderService.read(id);
         if (orders != null) {
             return new ResponseEntity<>(orders, HttpStatus.OK);
@@ -40,9 +42,10 @@ public class OrderController {
         return new ResponseEntity<>(updatedOrders, HttpStatus.OK);
     }
 
-    // Get all Orders
+
     @GetMapping(value = "/getAll")
-    public ResponseEntity<List<Orders>> findAll() {
+    public ResponseEntity<List<Orders>> findAll(@RequestParam String customerId) {
+
         List<Orders> orders = orderService.findAll();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
@@ -59,7 +62,7 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/findByOrderDateBetween")
+    @GetMapping(value = "/findByOrderDateBetween/")
     public ResponseEntity<List<Orders>> findByOrderDateBetween(
             @RequestParam LocalDate startDate, @RequestParam LocalDate endDate) {
         List<Orders> orders = orderService.findByOrderDateBetween(startDate, endDate);

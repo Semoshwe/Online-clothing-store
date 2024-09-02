@@ -6,14 +6,14 @@ import za.ac.cput.domain.OrderItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
- *OrderItemFactoryTest:java
+ *OrdersItemFactoryTest:java
  *OrderItem: Factory Class Test
  * Author: Luke Duffell
  * Student no: 217061567
  * Date: 17 May 2024
  */
 
-class OrderItemFactoryTest {
+class OrdersItemFactoryTest {
 
     @Test
     void buildOrderItem() {

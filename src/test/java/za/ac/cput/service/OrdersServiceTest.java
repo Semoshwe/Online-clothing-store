@@ -26,7 +26,7 @@ class OrdersServiceTest {
     @BeforeEach
     void setUp() {
         // Creating test data
-        String orderID = "1L";
+        String orderID ="";
         String customerID = "1001";
         LocalDate orderDate = LocalDate.now();
         String orderItemsID = "1234";
@@ -93,8 +93,14 @@ class OrdersServiceTest {
     @Test
     void findByOrderDateBetween() {
         orderService.create(orders);
-        List<Orders> ordersList = orderService.findByOrderDateBetween(LocalDate.of(2023, 6, 9), LocalDate.of(2024, 7, 6));
-        assertFalse(ordersList.isEmpty());
+
+        LocalDate startDate = LocalDate.of(2023, 6, 9);
+        LocalDate endDate = LocalDate.of(2024, 7, 6);
+        System.out.println("Start Date: " + startDate);
+        System.out.println("End Date: " + endDate);
+
+        List<Orders> ordersList = orderService.findByOrderDateBetween(startDate, endDate);
+        assertFalse(ordersList.isEmpty(), "No orders found between " + startDate + " and " + endDate);
         System.out.println(ordersList);
     }
 

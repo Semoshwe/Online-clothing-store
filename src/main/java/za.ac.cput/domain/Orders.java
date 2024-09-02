@@ -5,8 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Entity
 public class Orders implements Serializable {
     @Id
