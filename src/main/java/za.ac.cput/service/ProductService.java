@@ -8,23 +8,14 @@ package za.ac.cput.service;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Product;
 import za.ac.cput.repository.ProductRepository;
-
 import java.util.List;
 
 @Service
 public class ProductService implements IProductService{
-    private static IProductService service = null;
     private ProductRepository repository;
 
-    private ProductService(){
-
-    }
-
-    public static  IProductService getService(){
-        if(service == null){
-            service = new ProductService();
-        }
-        return service;
+    private ProductService(ProductRepository repository){
+        this.repository = repository;
     }
 
     @Override
@@ -43,8 +34,12 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void deleteByID(String ID) {
-        repository.deleteById(ID);
+    public boolean deleteByID(String productID) {
+        if(this.repository.existsById(productID)){
+            repository.deleteById(productID);
+            return true;
+        }
+        return false;
     }
 
     @Override

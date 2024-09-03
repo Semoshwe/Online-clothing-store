@@ -4,12 +4,13 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import za.ac.cput.domain.Orders;
 import za.ac.cput.domain.Product;
 import za.ac.cput.factory.ProductFactory;
+
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -26,7 +27,7 @@ class ProductControllerTest {
     @BeforeEach
     void setUp() {
         this.product = ProductFactory.createProduct("1", "Hoodie", "White medium Hoodie.", 300, 50, "1","1");
-        this.baseUrl = "http:/localhost:8080/online-clothing-store/product";
+        this.baseUrl = "http://localhost:8080/shopping_store/product";
     }
 
     @Order(1)
@@ -43,12 +44,28 @@ class ProductControllerTest {
 
     @Order(2)
     @Test
+//    void read() {
+//        String url = baseUrl + "/read/" + product.getProductID();
+//        System.out.println("URL: "+ url);
+//        ResponseEntity<Product> response = restTemplate.getForEntity(url, Product.class);
+//        assertNotNull(response);
+//        assertNotNull(response.getBody());
+//        assertEquals(product.getProductID(), response.getBody().getProductID());
+//        System.out.println("Read: "+ response.getBody());
+//    }
+
     void read() {
-        String url = baseUrl + "/read/" + product.getProductID();
-        System.out.println("URL: "+ url);
-        ResponseEntity<Product> response = restTemplate.getForEntity(url, Product.class);
-        assertEquals(product.getProductID(), response.getBody().getProductID());
-        System.out.println("Read: "+ response.getBody());
+        String createUrl = baseUrl + "/create";
+        restTemplate.postForEntity(createUrl, product, Product.class);
+
+        String url3 = baseUrl + "/read/" + product.getProductID();
+        ResponseEntity<Product> response = restTemplate.getForEntity(url3, Product.class);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(product.getProductID(), Objects.requireNonNull(response.getBody()).getProductID());
+        System.out.println(response.getBody());
     }
 
     @Order(3)

@@ -8,25 +8,16 @@ package za.ac.cput.service;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.ProductImage;
 import za.ac.cput.repository.ProductImageRepository;
-
 import java.util.List;
 
 @Service
 public class ProductImageService implements IProductImageService {
-
-    private static IProductImageService service = null;
     private ProductImageRepository repository;
 
-    private ProductImageService(){
-
+    private ProductImageService(ProductImageRepository repository){
+        this.repository = repository;
     }
 
-    public static IProductImageService getService(){
-        if(service == null){
-            service = new ProductImageService();
-        }
-        return service;
-    }
     @Override
     public ProductImage create(ProductImage productImage) {
         return repository.save(productImage);
@@ -43,8 +34,12 @@ public class ProductImageService implements IProductImageService {
     }
 
     @Override
-    public void deleteByID(String ID) {
-        repository.deleteById(ID);
+    public boolean deleteByID(String productID) {
+        if(this.repository.existsById(productID)){
+            repository.deleteById(productID);
+            return true;
+        }
+        return false;
     }
 
     @Override
