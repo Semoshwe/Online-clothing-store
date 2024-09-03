@@ -16,6 +16,7 @@ class ProductServiceTest {
 
     private static Product product1;
     private static Product product2;
+    private static Product product3;
 
     @Order(1)
     @Test
@@ -27,6 +28,10 @@ class ProductServiceTest {
         product2 = ProductFactory.createProduct("2", "Jeans", "Black medium skinny jeans.", 350, 40, "2","2");
         assertNotNull(product2);
         System.out.println(product2);
+
+        product3 = ProductFactory.createProduct("3", "T-shirt", "Black v-neck slim fit.", 250, 50, "3","3");
+        assertNotNull(product3);
+        System.out.println(product3);
     }
 
     @Order(2)
@@ -39,14 +44,22 @@ class ProductServiceTest {
         Product created2 = productService.create(product2);
         assertNotNull(created2);
         System.out.println(created2);
+
+        Product created3 = productService.create(product2);
+        assertNotNull(created3);
+        System.out.println(created3);
     }
 
     @Order(3)
     @Test
     void read() {
-        Product read = productService.read(product2.getProductID());
+        Product read = productService.read(product1.getProductID());
         assertNotNull(read);
         System.out.println(read);
+
+        Product read1 = productService.read(product2.getProductID());
+        assertNotNull(read1);
+        System.out.println(read1);
     }
 
         @Order(4)
@@ -64,6 +77,14 @@ class ProductServiceTest {
         Product updated = productService.update(newProduct);
         assertNotNull(updated);
             System.out.println(updated);
+    }
+
+    @Order(6)
+    @Test
+    void deleteByID(){
+        boolean success = productService.deleteByID(product3.getProductID());
+        assertTrue(success);
+        System.out.println("Deleted product: "+ success);
     }
 
     @Order(5)
