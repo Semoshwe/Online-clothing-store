@@ -33,6 +33,9 @@ public class Helper {
     public static boolean isValidRange(int rating) {
         return rating >= 1 && rating <= 5;
     }
+    public static boolean isNullOrEmpty(Integer i) {
+        return i == null;
+    }
 
     public static boolean isEmailValid(String email, String regex) {
         return Pattern.compile(regex)

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.MethodName.class)
-class EmployeeControllerTest {
+class UserControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -30,7 +30,15 @@ class EmployeeControllerTest {
 
     @BeforeAll
     public static void setup(){
-        user = UserFactory.createUser("UD666", "Semoshwe", "Mapokgole", "peoplelll", "moshwe2@gmail.com", "00567","Low Str");
+        user = UserFactory.createUser(
+                "UD666",
+                "Semoshwe",
+                "Mapokgole",
+                "peoplelll",
+                "moshwe2@gmail.com",
+                "00567",
+                "Low Str"
+        );
     }
 
     @Test

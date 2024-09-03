@@ -1,6 +1,7 @@
 package za.ac.cput.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Orders;
 
 
@@ -11,7 +12,7 @@ import za.ac.cput.domain.Orders;
  * Student num: 22045540
  * Date: 17 May 2024
  */
-//@Repository
+@Repository
 public interface OrderRepository extends JpaRepository<Orders, String> {
 /*
     List<Orders> getall();

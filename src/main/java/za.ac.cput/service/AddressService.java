@@ -10,6 +10,8 @@ import java.util.List;
 public class AddressService implements IAddressService{
     private AddressRepository repository;
 
+
+
     @Autowired
     AddressService(AddressRepository repository) {this.repository = repository;}
 
@@ -32,7 +34,7 @@ public class AddressService implements IAddressService{
 
     @Override
     public List<Address> findAll() {
-        return null;
+        return repository.findAll();
     }
 
 }
