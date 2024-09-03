@@ -21,7 +21,15 @@ class UserServiceTest {
 
     @BeforeEach
     void setup(){
-        user1 = UserFactory.createUser("UD005","simple","Dlaini","ssfftteeyy", "Simple12@gmail.com", "102ADD","Long St");
+        user1 = UserFactory.createUser(
+                "UD005",
+                "simple",
+                "Dlaini",
+                "ssfftteeyy",
+                "Simple12@gmail.com",
+                "102ADD",
+                "Long St"
+        );
         assertNotNull(user1);
         System.out.println(user1);
     }
