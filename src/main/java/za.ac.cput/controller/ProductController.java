@@ -25,13 +25,18 @@ public class ProductController {
     }
 
     @GetMapping("/read/{id}")
-    public Product read(@PathVariable String id){
+    public Product read(@PathVariable Long id){
         return productService.read(id);
     }
 
     @PostMapping("/update")
     public Product update(@RequestBody Product product){
         return productService.update(product);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable Long id){
+        return productService.deleteByID(id);
     }
 
     @GetMapping("/getAll")

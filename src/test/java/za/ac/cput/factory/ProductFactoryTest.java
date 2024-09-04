@@ -69,6 +69,22 @@ public class ProductFactoryTest {
     }
 
     @Test
+    @Order(1)
+    public void buildProduct(){
+        Product product = ProductFactory.createProduct(
+                1L,
+                "4",
+                "T-shirt",
+                "Black V-neck.",
+                300,
+                50,
+                "4",
+                "4");
+        System.out.println(product.toString());
+        assertNotNull(product);
+    }
+
+    @Test
     @Order(3)
     public void testIdentity(){
         System.out.println("Testing the identity that product2: "+product2+" is the same as product3: "+product3);

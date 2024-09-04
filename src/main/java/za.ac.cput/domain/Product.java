@@ -8,6 +8,8 @@ package za.ac.cput.domain;
  */
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
@@ -16,7 +18,8 @@ import java.util.Objects;
 @Entity
 public class Product implements Serializable {
     @Id
-    private String productID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productID;
     private String categoryID;
     private String name;
     private String description;
@@ -40,7 +43,7 @@ public class Product implements Serializable {
         this.imageID = builder.imageID;
     }
 
-    public String getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
@@ -100,7 +103,7 @@ public class Product implements Serializable {
     }
 
     public static class Builder{
-        private String productID;
+        private Long productID;
         private String categoryID;
         private String name;
         private String description;
@@ -109,7 +112,7 @@ public class Product implements Serializable {
         private String reviewID;
         private String imageID;
 
-        public Builder setProductID(String productID){
+        public Builder setProductID(Long productID){
             this.productID = productID;
             return this;
         }

@@ -24,7 +24,7 @@ public class ProductImageService implements IProductImageService {
     }
 
     @Override
-    public ProductImage read(String id) {
+    public ProductImage read(Long id) {
         return this.repository.findById(id).orElse(null);
     }
 
@@ -34,9 +34,9 @@ public class ProductImageService implements IProductImageService {
     }
 
     @Override
-    public boolean deleteByID(String productID) {
-        if(this.repository.existsById(productID)){
-            repository.deleteById(productID);
+    public boolean deleteByID(Long imageID) {
+        if(this.repository.existsById(imageID)){
+            repository.deleteById(imageID);
             return true;
         }
         return false;
@@ -48,12 +48,12 @@ public class ProductImageService implements IProductImageService {
     }
 
     @Override
-    public ProductImage findByImageID(String imageID) {
+    public ProductImage findByImageID(Long imageID) {
         return repository.findByImageID(imageID);
     }
 
     @Override
-    public ProductImage findByProductID(String productID) {
+    public ProductImage findByProductID(Long productID) {
         return repository.findByProductID(productID);
     }
 }

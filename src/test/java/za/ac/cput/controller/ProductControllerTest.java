@@ -26,7 +26,16 @@ class ProductControllerTest {
 
     @BeforeEach
     void setUp() {
-        this.product = ProductFactory.createProduct("1", "Hoodie", "White medium Hoodie.", 300, 50, "1","1");
+        this.product = ProductFactory.createProduct(
+                1L,
+                "1",
+                "Hoodie",
+                "White medium Hoodie.",
+                300,
+                50,
+                "1",
+                "1"
+        );
         this.baseUrl = "http://localhost:8080/shopping_store/product";
     }
 
@@ -79,6 +88,13 @@ class ProductControllerTest {
         Product productUpdated = postResponse.getBody();
         assertEquals(updateProduct.getProductID(), productUpdated.getProductID());
         System.out.println("Updated product: "+ productUpdated);
+    }
+
+    @Test
+    void delete(){
+        String url = baseUrl + "/delete/" + "";
+        System.out.println(url);
+        restTemplate.delete(url);
     }
 
     @Order(4)

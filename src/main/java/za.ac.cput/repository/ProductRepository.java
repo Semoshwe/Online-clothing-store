@@ -6,7 +6,7 @@ import za.ac.cput.domain.Product;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, String> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByDescription(String description);
 
     List<Product> findByName(String name);

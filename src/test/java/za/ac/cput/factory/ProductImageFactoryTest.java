@@ -17,11 +17,20 @@ public class ProductImageFactoryTest {
     @BeforeEach
     void setUp(){
         byte[] photo = new byte[0];
-        productImage1 = ProductImageFactory.createProductImage("1", photo);
+        productImage1 = ProductImageFactory.createProductImage(
+                1L,
+                1L,
+                photo);
 
-        productImage2 = ProductImageFactory.createProductImage("2", photo);
+        productImage2 = ProductImageFactory.createProductImage(
+                1L,
+                1L,
+                photo);
 
-        productImage3 = ProductImageFactory.createProductImage("3", photo);
+        productImage3 = ProductImageFactory.createProductImage(
+                1L,
+                1L,
+                photo);
     }
 
     @Test
@@ -40,6 +49,19 @@ public class ProductImageFactoryTest {
         assertNotNull(productImage2);
         assertNotNull(productImage3);
         assertEquals(productImage2, productImage3);
+    }
+
+    @Test
+    @Order(1)
+    public void buildProductImage(){
+        byte[] photo = new byte[0];
+        ProductImage productImage = ProductImageFactory.createProductImage(
+                1L,
+                1L,
+                photo
+        );
+        System.out.println(productImage.toString());
+        assertNotNull(productImage);
     }
 
     @Test
