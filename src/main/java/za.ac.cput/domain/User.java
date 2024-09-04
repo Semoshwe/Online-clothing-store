@@ -2,41 +2,66 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * Represents a user in the system.
+ * <p>
+ * This entity class is mapped to the "users" table in the database.
+ *
+ * @author Rethabile Ntsekhe
+ * @date 25-Aug-24
+ */
 
 @Entity
-@Table(name = "User")
-public class User /*implements Serializable*/ {
+@Table(name = "users")
+public class User {
+
     @Id
-    private String userID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userID;
+
+    private String avatar;
     private String firstName;
     private String lastName;
-    private String password;
+    @Column(unique = true)
     private String email;
+    private LocalDate birthDate;
+    private String password;
+    private String phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "addressID")
-    private Address address;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
+    private Set<String> role = new HashSet<>();
 
-    private String customerID;
-
-    protected User() {
+    public User() {
     }
 
+    // Private constructor to be used by the builder
     private User(Builder builder) {
         this.userID = builder.userID;
+        this.avatar = builder.avatar;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
-        this.password = builder.password;
         this.email = builder.email;
-        this.address = builder.address;
-        this.customerID = builder.customerID;
+        this.birthDate = builder.birthDate;
+        this.password = builder.password;
+        this.phoneNumber = builder.phoneNumber;
+        this.role.addAll(builder.role);
     }
 
-    public String getUserID() {
+    // Getters
+    public Long getUserID() {
         return userID;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -46,76 +71,80 @@ public class User /*implements Serializable*/ {
         return lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
     public String getPassword() {
         return password;
     }
 
-
-    public String getEmail() {
-        return email;
-    }
-    public Address getAddress() {
-        return address;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getCustomerID() {
-        return customerID;
+    public Set<String> getRole() {
+        return role;
+    }
+
+    @Override
+    public String toString() {
+        return "'\n'+User{" +
+                "id=" + userID +
+                ", avatar='" + avatar + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role=" + role +
+                '\n';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-
-        if (getUserID() != null ? !getUserID().equals(user.getUserID()) : user.getUserID() != null) return false;
-        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null)
-            return false;
-        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null)
-            return false;
-        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
-            return false;
-        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
-        if (getAddress() != null ? !getAddress().equals(user.getAddress()) : user.getAddress() != null) return false;
-        return getCustomerID() != null ? getCustomerID().equals(user.getCustomerID()) : user.getCustomerID() == null;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userID, user.userID) &&
+                Objects.equals(avatar, user.avatar) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(birthDate, user.birthDate) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(phoneNumber, user.phoneNumber) &&
+                Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        int result = getUserID() != null ? getUserID().hashCode() : 0;
-        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
-        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
-        result = 31 * result + (getCustomerID() != null ? getCustomerID().hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userID='" + userID + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", address=" + address +
-                ", customerID='" + customerID + '\'' +
-                '}';
+        return Objects.hash(userID, avatar, firstName, lastName, email, birthDate, password, phoneNumber, role);
     }
 
     public static class Builder {
-        private String userID;
+        private Long userID;
+        private String avatar;
         private String firstName;
         private String lastName;
-        private String password;
         private String email;
-        private Address address;
-        private String customerID;
+        private LocalDate birthDate;
+        private String password;
+        private String phoneNumber;
+        private Set<String> role = new HashSet<>();
 
-        public Builder setUserID(String userID) {
+        public Builder setId(Long userID) {
             this.userID = userID;
+            return this;
+        }
+
+        public Builder setAvatar(String avatar) {
+            this.avatar = avatar;
             return this;
         }
 
@@ -129,33 +158,41 @@ public class User /*implements Serializable*/ {
             return this;
         }
 
-        public Builder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
         public Builder setEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder setAddress(Address address) {
-            this.address = address;
+        public Builder setBirthDate(LocalDate birthDate) {
+            this.birthDate = birthDate;
             return this;
         }
 
-        public Builder setCustomerID(String customerID) {
-            this.customerID = customerID;
+        public Builder setPassword(String password) {
+            this.password = password;
             return this;
         }
-        public Builder copy(User user){
-            this.userID = user.userID;
-            this.firstName = user.firstName;
-            this.lastName = user.lastName;
-            this.password = user.password;
-            this.email = user.email;
-            this.address = user.address;
-            this.customerID = user.customerID;
+
+        public Builder setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder setRole(Set<String> role) {
+            this.role = role;
+            return this;
+        }
+
+        public Builder copy(User user) {
+            this.userID = user.getUserID();
+            this.avatar = user.getAvatar();
+            this.firstName = user.getFirstName();
+            this.lastName = user.getLastName();
+            this.email = user.getEmail();
+            this.birthDate = user.getBirthDate();
+            this.password = user.getPassword();
+            this.phoneNumber = user.getPhoneNumber();
+            this.role = new HashSet<>(user.getRole());
             return this;
         }
 
