@@ -20,15 +20,24 @@ class ProductImageServiceTest {
     @Test
     void setUp() {
         byte[] photo = new byte[0];
-        productImage1 = ProductImageFactory.createProductImage("1", photo);
+        productImage1 = ProductImageFactory.createProductImage(
+                1L,
+                3L,
+                photo);
         assertNotNull(productImage1);
         System.out.println(productImage1);
 
-        productImage2 = ProductImageFactory.createProductImage("2", photo);
+        productImage2 = ProductImageFactory.createProductImage(
+                2L,
+                1L,
+                photo);
         assertNotNull(productImage2);
         System.out.println(productImage2);
 
-        productImage3 = ProductImageFactory.createProductImage("3", photo);
+        productImage3 = ProductImageFactory.createProductImage(
+                1L,
+                1L,
+                photo);
         assertNotNull(productImage3);
         System.out.println(productImage3);
     }
@@ -52,11 +61,11 @@ class ProductImageServiceTest {
     @Order(3)
     @Test
     void read() {
-        ProductImage read = productImageService.read(productImage1.getProductID());
+        ProductImage read = productImageService.read(1L);
         assertNotNull(read);
         System.out.println(read);
 
-        ProductImage read1 = productImageService.read(productImage2.getProductID());
+        ProductImage read1 = productImageService.read(2L);
         assertNotNull(read1);
         System.out.println(read1);
     }
@@ -66,7 +75,7 @@ class ProductImageServiceTest {
     void update() {
         byte[] photo = new byte[0];
         ProductImage newProductImage = new ProductImage.Builder().copy(productImage1)
-                .setProductID("3")
+                .setProductID(1L)
                 .setImage(photo)
                 .build();
         ProductImage update = productImageService.update(newProductImage);

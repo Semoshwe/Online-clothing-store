@@ -8,10 +8,10 @@ package za.ac.cput.service;
 import za.ac.cput.domain.ProductImage;
 
 
-public interface IProductImageService extends IService<ProductImage, String>{
-    boolean deleteByID(String ID);
+public interface IProductImageService extends IService<ProductImage, Long>{
+    boolean deleteByID(Long ID);
 
-    ProductImage findByImageID(String imageID);
+    ProductImage findByImageID(Long imageID);
 
-    ProductImage findByProductID(String productID);
+    ProductImage findByProductID(Long productID);
 }

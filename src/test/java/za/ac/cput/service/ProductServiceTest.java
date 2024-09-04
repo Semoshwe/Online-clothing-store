@@ -21,15 +21,39 @@ class ProductServiceTest {
     @Order(1)
     @Test
     void setUp() {
-        product1 = ProductFactory.createProduct("1", "Hoodie", "White medium Hoodie.", 300, 50, "1","1");
+        product1 = ProductFactory.createProduct(
+                null,
+                "1",
+                "Hoodie",
+                "White medium Hoodie.",
+                300,
+                50,
+                "1",
+                "1");
         assertNotNull(product1);
         System.out.println(product1);
 
-        product2 = ProductFactory.createProduct("2", "Jeans", "Black medium skinny jeans.", 350, 40, "2","2");
+        product2 = ProductFactory.createProduct(
+                null,
+                "2",
+                "Jeans",
+                "Black medium skinny jeans.",
+                350,
+                40,
+                "2",
+                "2");
         assertNotNull(product2);
         System.out.println(product2);
 
-        product3 = ProductFactory.createProduct("3", "T-shirt", "Black v-neck slim fit.", 250, 50, "3","3");
+        product3 = ProductFactory.createProduct(
+                null,
+                "3",
+                "T-shirt",
+                "Black v-neck slim fit.",
+                250,
+                50,
+                "3",
+                "3");
         assertNotNull(product3);
         System.out.println(product3);
     }

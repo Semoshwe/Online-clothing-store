@@ -29,7 +29,11 @@ class ProductImageControllerTest {
     @BeforeEach
     void setup(){
         byte[] photo = new byte[0];
-        this.productImage = ProductImageFactory.createProductImage("1",photo);
+        this.productImage = ProductImageFactory.createProductImage(
+                1L,
+                1L,
+                photo
+        );
         this.baseUrl = "http://localhost:8080/shopping_store/productImage";
     }
     @Test
