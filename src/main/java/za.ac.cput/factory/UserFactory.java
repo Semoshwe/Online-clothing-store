@@ -16,6 +16,7 @@ import java.util.Set;
  */
 public class UserFactory {
 
+
     /**
      * Creates a {@link User} instance from various input parameters.
      *

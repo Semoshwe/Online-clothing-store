@@ -15,34 +15,34 @@ import za.ac.cput.service.ProductReviewService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/productreview")
+@RequestMapping("/productReview")
 public class ProductReviewController {
+
     @Autowired
     private ProductReviewService productReviewService;
 
     @PostMapping("/create")
-    public ProductReview create(@RequestBody ProductReview productReview){
+    public ProductReview create(@RequestBody ProductReview productReview) {
         return productReviewService.create(productReview);
-    }
+    } // create method for ProductReview
 
     @GetMapping("/read/{id}")
-    public ProductReview read(@PathVariable String id){
+    public ProductReview read(@PathVariable Long id) {
         return productReviewService.read(id);
     }
 
     @PostMapping("/update")
-    public ProductReview update(@RequestBody ProductReview productReview){
+    public ProductReview update(@RequestBody ProductReview productReview) {
         return productReviewService.update(productReview);
     }
 
-    /*@GetMapping("/delete/{id}")
-    public boolean delete(@PathVariable String id){
-        return productReviewService.delete(id);
-    }
-*/ //service must be modified to include delete method
-
-    @GetMapping("/getall")
-    public List<ProductReview> getAll(){
+    @GetMapping("/getAll")
+    public List<ProductReview> getAll() {
         return productReviewService.findAll();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        productReviewService.delete(id);
     }
 }

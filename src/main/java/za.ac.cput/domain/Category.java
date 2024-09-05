@@ -9,37 +9,43 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Category")
-public class Category {
-    //Attributes
+public class Category implements Serializable {
     @Id
-    private String categoryID;
+    private  Long categoryId;
     private String categoryName;
+    private  String subCategoryName;
 
-    //Constructor
-    public Category(){
-        //
+    public Category() {
     }
 
-    private Category(Builder builder){
-        this.categoryID = builder.categoryID;
+    public Category(Builder builder) {
+        this.categoryId = builder.categoryId;
         this.categoryName = builder.categoryName;
+        this.subCategoryName = builder.subCategoryName;
     }
 
-    //Getters
-    public String getCategoryID() {
-        return categoryID;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public String getSubCategoryName() {
+        return subCategoryName;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     @Override
@@ -47,44 +53,51 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(categoryID, category.categoryID) && Objects.equals(categoryName, category.categoryName);
+        return Objects.equals(categoryId, category.categoryId) && Objects.equals(categoryName, category.categoryName) && Objects.equals(subCategoryName, category.subCategoryName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryID, categoryName);
+        return Objects.hash(categoryId, categoryName, subCategoryName);
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "categoryID='" + categoryID + '\'' +
+                "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
+                ", subCategoryName='" + subCategoryName + '\'' +
                 '}';
     }
 
-    //Builder Pattern
-    public static class Builder{
-        private String categoryID;
+    public static class Builder {
+        private Long categoryId;
         private String categoryName;
+        private String subCategoryName;
 
-        public Builder setCategoryID(String categoryID){
-            this.categoryID = categoryID;
+        public Builder setCategoryId(Long categoryId) {
+            this.categoryId = categoryId;
             return this;
         }
 
-        public Builder setCategoryName(String categoryName){
+        public Builder setCategoryName(String categoryName) {
             this.categoryName = categoryName;
             return this;
         }
 
-        public Builder copy(Category category){
-            this.categoryID = category.categoryID;
-            this.categoryName = category.categoryName;
+        public Builder setSubCategoryName(String subCategoryName) {
+            this.subCategoryName = subCategoryName;
             return this;
         }
 
-        public Category build(){
+        public Builder copy(Category category) {
+            this.categoryId = category.categoryId;
+            this.categoryName = category.categoryName;
+            this.subCategoryName = category.subCategoryName;
+            return this;
+        }
+
+        public Category build() {
             return new Category(this);
         }
     }
