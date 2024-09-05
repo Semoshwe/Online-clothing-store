@@ -5,6 +5,7 @@ import za.ac.cput.util.Helper;
 
 public class UserFactory {
 
+
     /**
      * Creates a User object if all required fields are valid.
      *
