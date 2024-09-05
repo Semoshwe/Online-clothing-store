@@ -7,5 +7,11 @@ package za.ac.cput.service;
  */
 import za.ac.cput.domain.Product;
 
-public interface IProductService extends IService<Product, String>{
+import java.util.List;
+
+public interface IProductService extends IService<Product, Long>{
+    boolean deleteByID(Long iD);
+    List<Product> findByDescription(String description);
+
+    List<Product> findByName(String name);
 }

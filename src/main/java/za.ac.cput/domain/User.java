@@ -1,23 +1,20 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
-@Table(name = "User")
-public class User /*implements Serializable*/ {
+@Table(name = "user")
+public class User implements Serializable{
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) // Add this if userID is auto-generated
     private String userID;
+
     private String firstName;
     private String lastName;
     private String password;
     private String email;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "addressID")
-    private Address address;
-
+    private String addressID;
     private String customerID;
 
     protected User() {
@@ -29,14 +26,13 @@ public class User /*implements Serializable*/ {
         this.lastName = builder.lastName;
         this.password = builder.password;
         this.email = builder.email;
-        this.address = builder.address;
+        this.addressID = builder.addressID;
         this.customerID = builder.customerID;
     }
 
     public String getUserID() {
         return userID;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -46,17 +42,16 @@ public class User /*implements Serializable*/ {
         return lastName;
     }
 
-
     public String getPassword() {
         return password;
     }
 
-
     public String getEmail() {
         return email;
     }
-    public Address getAddress() {
-        return address;
+
+    public String getAddressID() {
+        return addressID;
     }
 
     public String getCustomerID() {
@@ -68,27 +63,24 @@ public class User /*implements Serializable*/ {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
 
-        if (getUserID() != null ? !getUserID().equals(user.getUserID()) : user.getUserID() != null) return false;
-        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null)
-            return false;
-        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null)
-            return false;
-        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
-            return false;
-        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
-        if (getAddress() != null ? !getAddress().equals(user.getAddress()) : user.getAddress() != null) return false;
-        return getCustomerID() != null ? getCustomerID().equals(user.getCustomerID()) : user.getCustomerID() == null;
+        return (userID != null ? userID.equals(user.userID) : user.userID == null) &&
+               (firstName != null ? firstName.equals(user.firstName) : user.firstName == null) &&
+               (lastName != null ? lastName.equals(user.lastName) : user.lastName == null) &&
+               (password != null ? password.equals(user.password) : user.password == null) &&
+               (email != null ? email.equals(user.email) : user.email == null) &&
+               (addressID != null ? addressID.equals(user.addressID) : user.addressID == null) &&
+               (customerID != null ? customerID.equals(user.customerID) : user.customerID == null);
     }
 
     @Override
     public int hashCode() {
-        int result = getUserID() != null ? getUserID().hashCode() : 0;
-        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
-        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
-        result = 31 * result + (getCustomerID() != null ? getCustomerID().hashCode() : 0);
+        int result = userID != null ? userID.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (addressID != null ? addressID.hashCode() : 0);
+        result = 31 * result + (customerID != null ? customerID.hashCode() : 0);
         return result;
     }
 
@@ -100,7 +92,7 @@ public class User /*implements Serializable*/ {
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", address=" + address +
+                ", addressID='" + addressID + '\'' +
                 ", customerID='" + customerID + '\'' +
                 '}';
     }
@@ -111,7 +103,7 @@ public class User /*implements Serializable*/ {
         private String lastName;
         private String password;
         private String email;
-        private Address address;
+        private String addressID;
         private String customerID;
 
         public Builder setUserID(String userID) {
@@ -139,8 +131,8 @@ public class User /*implements Serializable*/ {
             return this;
         }
 
-        public Builder setAddress(Address address) {
-            this.address = address;
+        public Builder setAddressID(String addressID) {
+            this.addressID = addressID;
             return this;
         }
 
@@ -148,13 +140,14 @@ public class User /*implements Serializable*/ {
             this.customerID = customerID;
             return this;
         }
+
         public Builder copy(User user){
             this.userID = user.userID;
             this.firstName = user.firstName;
             this.lastName = user.lastName;
             this.password = user.password;
             this.email = user.email;
-            this.address = user.address;
+            this.addressID = user.addressID;
             this.customerID = user.customerID;
             return this;
         }

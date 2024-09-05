@@ -6,18 +6,18 @@ import za.ac.cput.domain.OrderItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
- *OrderItemFactoryTest:java
+ *OrdersItemFactoryTest:java
  *OrderItem: Factory Class Test
  * Author: Luke Duffell
  * Student no: 217061567
  * Date: 17 May 2024
  */
 
-class OrderItemFactoryTest {
+class OrdersItemFactoryTest {
 
     @Test
     void buildOrderItem() {
-        OrderItem orderItem = OrderItemFactory.buildOrderItem("PC9775", 5, 9.99);
+        OrderItem orderItem = OrderItemFactory.buildOrderItem("9","PC9775", 5, 9.99);
 
         assertNotNull(orderItem);
         System.out.println(orderItem);

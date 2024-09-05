@@ -1,44 +1,49 @@
 package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.User;
-import za.ac.cput.repository.AddressRepository;
 import za.ac.cput.repository.UserRepository;
 
 import java.util.List;
 
 @Service
 public class UserService implements IUserService {
-    private AddressRepository addressrepository;
-    private UserRepository repository;
-    @Autowired
 
-    public UserService(AddressRepository addressrepository, UserRepository repository) {
-        this.addressrepository = addressrepository;
+    private final UserRepository repository;
+
+    @Autowired
+    public UserService( UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public User create(User user) {
-        addressrepository.save(user.getAddress());
         return repository.save(user);
     }
 
     @Override
-    public User read(String s) {
-        return repository.findUserbyUserId(s);
+    public User read(String userID) {
+        return repository.findById(userID).orElse(null);
     }
 
     @Override
     public User update(User user) {
-        addressrepository.save(user.getAddress());
         return repository.save(user);
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<User> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
+    public List<User> findByLastName(String lastName) {
+        return repository.findByLastName(lastName);
     }
 }

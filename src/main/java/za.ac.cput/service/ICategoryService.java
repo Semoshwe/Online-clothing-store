@@ -13,5 +13,5 @@ import za.ac.cput.domain.Category;
 import java.util.List;
 
 public interface ICategoryService extends IService<Category, String>{
-    List<Category> getAll();
+    List<Category> findAll();
 }

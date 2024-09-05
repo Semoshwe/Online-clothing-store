@@ -7,7 +7,11 @@ package za.ac.cput.service;
  */
 import za.ac.cput.domain.ProductImage;
 
-import java.util.List;
 
-public interface IProductImageService extends IService<ProductImage, String>{
+public interface IProductImageService extends IService<ProductImage, Long>{
+    boolean deleteByID(Long ID);
+
+    ProductImage findByImageID(Long imageID);
+
+    ProductImage findByProductID(Long productID);
 }

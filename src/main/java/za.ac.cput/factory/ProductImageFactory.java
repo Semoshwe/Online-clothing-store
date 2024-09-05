@@ -11,14 +11,13 @@ import za.ac.cput.util.Helper;
 import java.sql.Blob;
 
 public class ProductImageFactory {
-    public static ProductImage createProductImage(String productID, Blob image){
+    public static ProductImage createProductImage(Long imageID, Long productID, byte[] image){
         if(Helper.isNullOrEmpty(productID)){
             return null;
         }
 
-        String imageID = Helper.generateId();
-
-        ProductImage productImage = new ProductImage.Builder().setImageID(imageID)
+        ProductImage productImage = new ProductImage.Builder()
+                .setImageID(imageID)
                 .setProductID(productID)
                 .setImage(image)
                 .build();

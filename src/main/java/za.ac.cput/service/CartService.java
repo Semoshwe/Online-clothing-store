@@ -1,5 +1,11 @@
 package za.ac.cput.service;
-
+/**
+ * E-Commerce Web Application for selling clothes
+ * CartService.java
+ * Service  class for Cart
+ * Author: Kinzonzi Genereux Mukoko - 221477934
+ * Date: 18 May 2024
+ * */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Cart;
@@ -8,16 +14,18 @@ import za.ac.cput.repository.CartRepository;
 import java.util.List;
 
 @Service
-public class CartService implements ICartService{
+public class CartService implements ICartService {
 
     private CartRepository repository;
 
     @Autowired
-    CartService(CartRepository repository){this.repository = repository;}
+    CartService(CartRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Cart create(Cart cart) {
-        return this.repository.save(cart);
+        return repository.save(cart);
     }
 
     @Override
@@ -27,11 +35,11 @@ public class CartService implements ICartService{
 
     @Override
     public Cart update(Cart cart) {
-        return this.repository.save(cart);
+        return repository.save(cart);
     }
 
     @Override
-    public List<Cart> getAll() {
-        return this.repository.findAll();
+    public List<Cart> findAll() {
+        return repository.findAll();
     }
 }

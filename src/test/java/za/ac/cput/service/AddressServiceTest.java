@@ -61,6 +61,6 @@ class AddressServiceTest {
     @Order(5)
     @Test
     void getall() {
-        System.out.println(addressService.getAll());
+        System.out.println(addressService.findAll());
     }
 }

@@ -15,7 +15,6 @@ public class Cart {
     @Id
     private String cartID;
     private String customerID;
-
     @ElementCollection
     @CollectionTable(
             name="CartItem",
@@ -78,22 +77,22 @@ public class Cart {
         private List<CartItem> cartItems;
         private double totalAmount;
 
-        public Builder setcartID(String cartID) {
+        public Builder setCartID(String cartID) {
             this.cartID = cartID;
             return this;
         }
 
-        public Builder setcustomerID(String customerID) {
+        public Builder setCustomerID(String customerID) {
             this.customerID = customerID;
             return this;
         }
 
-        public Builder setcartItems(List<CartItem> cartItems) {
+        public Builder setCartItems(List<CartItem> cartItems) {
             this.cartItems = cartItems;
             return this;
         }
 
-        public Builder settotalAmount(double totalAmount) {
+        public Builder setTotalAmount(double totalAmount) {
             this.totalAmount = totalAmount;
             return this;
         }

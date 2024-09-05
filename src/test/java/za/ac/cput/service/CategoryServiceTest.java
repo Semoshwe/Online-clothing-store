@@ -73,6 +73,6 @@ class CategoryServiceTest {
     @Test
     @Order(5)
     void getAll() {
-        System.out.println("All categories" + categoryService.getAll());
+        System.out.println("All categories" + categoryService.findAll());
     }
 }

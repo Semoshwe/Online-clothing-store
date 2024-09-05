@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.ProductImage;
 
-import java.util.List;
-
 @Repository
-public interface IProductImageRepository extends JpaRepository<ProductImage, String> {
+public interface ProductImageRepository extends JpaRepository<ProductImage, Long> {
+    ProductImage findByImageID(Long imageID);
+
+    ProductImage findByProductID(Long productID);
 }

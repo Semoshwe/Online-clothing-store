@@ -42,7 +42,7 @@ public class ProductReviewService implements IProductReviewService{
     }
 
     @Override
-    public List<ProductReview> getAll(){
+    public List<ProductReview> findAll(){
         return this.repository.findAll();
     }
 

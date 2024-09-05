@@ -42,7 +42,7 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public List<Category> getAll(){
+    public List<Category> findAll(){
         return this.repository.findAll();
     }
 }

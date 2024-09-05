@@ -13,5 +13,5 @@ import za.ac.cput.domain.ProductReview;
 import java.util.List;
 
 public interface IProductReviewService extends IService<ProductReview, String>{
-    List<ProductReview> getAll();
+    List<ProductReview> findAll();
 }

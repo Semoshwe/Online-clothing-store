@@ -81,6 +81,6 @@ class ProductReviewServiceTest {
     @Test
     @Order(5)
     void getAll() {
-        System.out.println("All productReviews" + productReviewService.getAll());
+        System.out.println("All productReviews" + productReviewService.findAll());
     }
 }

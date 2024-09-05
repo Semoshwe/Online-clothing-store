@@ -1,8 +1,6 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Blob;
@@ -11,10 +9,12 @@ import java.util.Objects;
 @Entity
 public class ProductImage implements Serializable {
     @Id
-    private String imageID;
-    private String productID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long imageID;
+    private Long productID;
     @Lob
-    private Blob image;
+    @Column(length=100000)
+    private byte[] image;
 
     protected ProductImage() {
 
@@ -26,15 +26,15 @@ public class ProductImage implements Serializable {
         this.image = builder.image;
     }
 
-    public String getImageID() {
+    public Long getImageID() {
         return imageID;
     }
 
-    public String getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
-    public Blob getImage() {
+    public byte[] getImage() {
         return image;
     }
 
@@ -61,21 +61,21 @@ public class ProductImage implements Serializable {
     }
 
     public static class Builder{
-        private String imageID;
-        private String productID;
-        private Blob image;
+        private Long imageID;
+        private Long productID;
+        private byte[] image;
 
-        public Builder setImageID(String imageID){
+        public Builder setImageID(Long imageID){
             this.imageID = imageID;
             return this;
         }
 
-        public Builder setProductID(String productID){
+        public Builder setProductID(Long productID){
             this.productID = productID;
             return this;
         }
 
-        public Builder setImage(Blob image){
+        public Builder setImage(byte[] image){
             this.image = image;
             return this;
         }

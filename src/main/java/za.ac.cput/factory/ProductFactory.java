@@ -10,7 +10,7 @@ import za.ac.cput.domain.Product;
 import za.ac.cput.util.Helper;
 
 public class ProductFactory {
-    public static Product createProduct(String categoryID, String name, String description, double price, int stock, String reviewID, String imageID){
+    public static Product createProduct(Long productID, String categoryID, String name, String description, double price, int stock, String reviewID, String imageID){
         if(Helper.isNullOrEmpty(categoryID)
         ||Helper.isNullOrEmpty(name)
         ||Helper.isNullOrEmpty(description)
@@ -19,9 +19,8 @@ public class ProductFactory {
             return null;
         }
 
-        String productID = Helper.generateId();
-
-        Product product = new Product.Builder().setProductID(productID)
+        Product product = new Product.Builder()
+                .setProductID(productID)
                 .setCategoryID(categoryID)
                 .setName(name)
                 .setDescription(description)

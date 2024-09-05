@@ -25,7 +25,7 @@ public class ProductImageController {
     }
 
     @GetMapping("/read/{id}")
-    public ProductImage read(@PathVariable String id){
+    public ProductImage read(@PathVariable Long id){
         return productImageService.read(id);
     }
 
@@ -34,8 +34,13 @@ public class ProductImageController {
         return productImageService.update(productImage);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable Long id){
+        return productImageService.deleteByID(id);
+    }
+
     @GetMapping("/getAll")
     public List<ProductImage> getAll(){
-        return productImageService.getAll();
+        return productImageService.findAll();
     }
 }
