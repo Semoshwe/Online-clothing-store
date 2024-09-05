@@ -12,8 +12,8 @@ import za.ac.cput.domain.ProductReview;
 import za.ac.cput.util.Helper;
 
 public class ProductReviewFactory {
-    public static ProductReview buildProductReview(String productReviewID, String productID, String customerID, String review, int rating){
-        if (Helper.isNullOrEmpty(productReviewID) || Helper.isNullOrEmpty(productID) || Helper.isNullOrEmpty(customerID) || Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
+    public static ProductReview buildProductReview(Long productReviewID, Long productID, Long customerID, String review, int rating){
+        if (Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
             return null;
 
         return new ProductReview.Builder()
@@ -25,14 +25,13 @@ public class ProductReviewFactory {
                 .build();
     }
 
-    public static ProductReview buildProductReview(String productID, String customerID, String review, int rating){
-        if (Helper.isNullOrEmpty(productID) || Helper.isNullOrEmpty(customerID) || Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
+    public static ProductReview buildProductReview(Long productID, Long customerID, String review, int rating){
+        if (Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
             return null;
 
-        String productReviewID = Helper.generateId();
-
+        Long productReviewID = Helper.generateIdLong();
         return new ProductReview.Builder()
-                .setProductReviewID(Helper.generateId())
+                .setProductReviewID(productReviewID)
                 .setProductID(productID)
                 .setCustomerID(customerID)
                 .setReview(review)

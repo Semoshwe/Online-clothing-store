@@ -17,6 +17,11 @@ public class Helper {
         return UUID.randomUUID().toString();
     }
 
+    //generate ID for Long
+    public static Long generateIdLong() {
+        return UUID.randomUUID().getMostSignificantBits();
+    }
+
     public static boolean isNullOrEmpty(String s) {
         return s == null || s.isEmpty();
     }

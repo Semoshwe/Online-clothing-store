@@ -12,11 +12,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Category;
 
-@Repository
-public interface CategoryRepository extends JpaRepository<Category, String> {
-    Category findCategoryByCategoryID(String categoryID);
-    Category findCategoryByCategoryName(String categoryName);
-    //Category findByIDAndCategoryName(String categoryID, String categoryName);
+import java.util.List;
 
+@Repository
+public interface CategoryRepository  extends  JpaRepository<Category, Long> {
+    List<Category> findByCategoryName(String categoryName);
+    List<Category> findByCategoryId(Long categoryId);
+    boolean deleteCategoryByCategoryId(Long categoryId);
     boolean deleteCategoryByCategoryName(String categoryName);
 }

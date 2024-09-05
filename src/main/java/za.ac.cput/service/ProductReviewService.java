@@ -16,34 +16,36 @@ import java.util.List;
 
 @Service
 public class ProductReviewService implements IProductReviewService{
-
-    private ProductReviewRepository repository;
+    private final ProductReviewRepository repository;
 
     @Autowired
-    ProductReviewService(ProductReviewRepository repository){
+    public ProductReviewService(ProductReviewRepository repository) {
         this.repository = repository;
     }
-
     @Override
-    public ProductReview create(ProductReview productReview){
+    public ProductReview create(ProductReview productReview) {
         return this.repository.save(productReview);
     }
 
     @Override
-    public ProductReview read(String productReviewID){
-        return this.repository.findById(productReviewID).orElse(null);
+    public ProductReview read(Long productReviewID) {
+        //return this.repository.findById(productReviewID).orElseThrow(() -> new RuntimeException("ProductReview not found"));
+        return this.repository.findByProductReviewID(productReviewID);
     }
 
     @Override
-    public ProductReview update(ProductReview productReview){
-        if (this.repository.existsById(productReview.getProductReviewID()))
-            return this.repository.save(productReview);
-        return null;
+    public ProductReview update(ProductReview productReview) {
+        return this.repository.save(productReview);
     }
 
     @Override
-    public List<ProductReview> findAll(){
+    public  List<ProductReview> findAll() {
         return this.repository.findAll();
+    }
+
+    @Override
+    public void delete(Long productReviewID) {
+        this.repository.deleteById(productReviewID);
     }
 
 }

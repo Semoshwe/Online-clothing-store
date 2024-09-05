@@ -18,20 +18,25 @@ import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.ProductReview;
 import za.ac.cput.factory.ProductReviewFactory;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ProductReviewControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    private final String BASE_URL = "http://localhost:8080/shopping_store/productreview";
+    private final String BASE_URL = "http://localhost:8080/shopping_store/productReview";
     private static ProductReview productReview;
+    private static ProductReview productReview2;
 
     @BeforeAll
     public static void setup(){
-        productReview = ProductReviewFactory.buildProductReview("1","1","1", "Good product", 3);
+        productReview = ProductReviewFactory.buildProductReview(66L,18L,23L, "Good product", 3);
+        productReview2 = ProductReviewFactory.buildProductReview( 19L, 24L, "Great product", 5);
     }
 
     @Test
@@ -44,6 +49,13 @@ class ProductReviewControllerTest {
         ProductReview productReviewSaved = postResponse.getBody();
         assertEquals(productReview.getProductReviewID(), productReviewSaved.getProductReviewID());
         System.out.println("Create: " + productReviewSaved);
+
+        ResponseEntity<ProductReview> postResponse2 = restTemplate.postForEntity(url, productReview2, ProductReview.class);
+        assertNotNull(postResponse2);
+        assertNotNull(postResponse2.getBody());
+        ProductReview productReviewSaved2 = postResponse2.getBody();
+        assertEquals(productReview2.getProductReviewID(), productReviewSaved2.getProductReviewID());
+        System.out.println("Create2: " + productReviewSaved2);
     }
 
     @Test
@@ -54,6 +66,12 @@ class ProductReviewControllerTest {
         ResponseEntity<ProductReview> response = restTemplate.getForEntity(url, ProductReview.class);
         assertEquals(productReview.getProductReviewID(), response.getBody().getProductReviewID());
         System.out.println("Read: " + response.getBody());
+
+        String url2 = BASE_URL + "/read/" + productReview2.getProductReviewID();
+        System.out.println("\nURL: " + url2);
+        ResponseEntity<ProductReview> response2 = restTemplate.getForEntity(url2, ProductReview.class);
+        assertEquals(productReview2.getProductReviewID(), response2.getBody().getProductReviewID());
+        System.out.println("Read2: " + response2.getBody());
     }
 
     @Test
@@ -63,15 +81,14 @@ class ProductReviewControllerTest {
         ProductReview newProductReview = new ProductReview.Builder().copy(productReview).setReview("Bad product").setRating(1).build();
         ResponseEntity<ProductReview> postResponse = restTemplate.postForEntity(url, newProductReview, ProductReview.class);
         assertNotNull(postResponse);
-        assertNotNull(postResponse.getBody());
-        ProductReview updatedProductReview = postResponse.getBody();
-        assertEquals(productReview.getProductReviewID(), updatedProductReview.getProductReviewID());
-        System.out.println("Update: " + updatedProductReview);
+        assertEquals(productReview.getProductReviewID(), Objects.requireNonNull(postResponse.getBody()).getProductReviewID());
+        System.out.println("Updated: " + postResponse.getBody());
     }
 
     @Test
+    @Order(4)
     void getAll() {
-        String url = BASE_URL + "/getall";
+        String url = BASE_URL + "/getAll";
         System.out.println("URL: " + url);
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
@@ -80,4 +97,12 @@ class ProductReviewControllerTest {
         System.out.println(response);
         System.out.println(response.getBody());
     }
+
+//    @Test
+//    @Order(5)
+//    void delete() {
+//        String url = BASE_URL + "/delete/" + productReview.getProductReviewID();
+//        System.out.println("URL: " + url);
+//        restTemplate.delete(url);
+//    }
 }

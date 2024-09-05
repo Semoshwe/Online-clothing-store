@@ -12,6 +12,8 @@ import za.ac.cput.domain.ProductReview;
 
 import java.util.List;
 
-public interface IProductReviewService extends IService<ProductReview, String>{
+public interface IProductReviewService extends IService<ProductReview, Long>{
+    void delete(Long productReviewID);
     List<ProductReview> findAll();
+    ProductReview create(ProductReview productReview);
 }

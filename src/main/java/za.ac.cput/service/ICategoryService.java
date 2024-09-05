@@ -12,6 +12,11 @@ import za.ac.cput.domain.Category;
 
 import java.util.List;
 
-public interface ICategoryService extends IService<Category, String>{
+public interface ICategoryService extends IService<Category, Long> {
+    void delete(Long categoryId);
     List<Category> findAll();
+    Category create(Category category);
+
+//    List<Category> findByCategoryName(String categoryName);
+//    List<Category> findByCategoryId(Long categoryId);
 }
