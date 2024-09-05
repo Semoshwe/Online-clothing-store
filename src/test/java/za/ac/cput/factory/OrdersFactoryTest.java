@@ -13,7 +13,7 @@ public class OrdersFactoryTest {
     @Test
     public void testCreateOrder() {
         // Creating test data
-        String orderID = "11111113445L";
+        Long orderID = 1L;
         String customerID = "1001";
         LocalDate orderDate = LocalDate.now();
 

@@ -26,7 +26,7 @@ public class Helper {
         return s == null || Double.isNaN(s);
     }
 
-    public static boolean isNullOrEmpty(List<Orders> s) {
+    public static boolean isNullOrEmpty(List<Object> s) {
         return s == null || s.isEmpty();
     }
 
