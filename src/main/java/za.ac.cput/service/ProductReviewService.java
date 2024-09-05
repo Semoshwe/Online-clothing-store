@@ -16,12 +16,14 @@ import java.util.List;
 
 @Service
 public class ProductReviewService implements IProductReviewService{
-    private final ProductReviewRepository repository;
+
+    private  final ProductReviewRepository repository;
 
     @Autowired
     public ProductReviewService(ProductReviewRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public ProductReview create(ProductReview productReview) {
         return this.repository.save(productReview);
@@ -29,23 +31,28 @@ public class ProductReviewService implements IProductReviewService{
 
     @Override
     public ProductReview read(Long productReviewID) {
-        //return this.repository.findById(productReviewID).orElseThrow(() -> new RuntimeException("ProductReview not found"));
-        return this.repository.findByProductReviewID(productReviewID);
+        //return this.repository.findProductReviewByProductReviewID(productReviewID);
+        return this.repository.findById(productReviewID).orElse(null);
     }
 
     @Override
     public ProductReview update(ProductReview productReview) {
-        return this.repository.save(productReview);
+        if (repository.existsById(productReview.getProductReviewID())) {
+            return repository.save(productReview);  // Save only if the record exists
+        } else {
+            return null;  // Return null if the record doesn't exist to avoid creating a new one
+        }
     }
 
+
     @Override
-    public  List<ProductReview> findAll() {
+    public List<ProductReview> findAll() {
         return this.repository.findAll();
     }
 
     @Override
     public void delete(Long productReviewID) {
+        //this.repository.deleteProductReviewByProductReviewID(productReviewID);
         this.repository.deleteById(productReviewID);
     }
-
 }

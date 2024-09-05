@@ -9,45 +9,44 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 public class ProductReview implements Serializable {
-    //Attributes
+    // Attributes
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productReviewID;
-    private Long customerID;
-    private Long productID;
-
+    private String productName;
+    private String customerName;
     private String review;
     private int rating;
 
-    //Constructor
-    public ProductReview(){
+    // Constructor
+    public ProductReview() {
         //
     }
 
-    private ProductReview(Builder builder){
+    private ProductReview(Builder builder) {
         this.productReviewID = builder.productReviewID;
-        this.productID = builder.productID;
-        this.customerID = builder.customerID;
+        this.productName = builder.productName;
+        this.customerName = builder.customerName;
         this.review = builder.review;
         this.rating = builder.rating;
     }
 
-    //Getters
+    // Getters
     public Long getProductReviewID() {
         return productReviewID;
     }
 
-    public Long getCustomerID() {
-        return customerID;
+    public String getProductName() {
+        return productName;
     }
 
-    public Long getProductID() {
-        return productID;
+    public String getCustomerName() {
+        return customerName;
     }
 
     public String getReview() {
@@ -63,68 +62,68 @@ public class ProductReview implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductReview that = (ProductReview) o;
-        return rating == that.rating && Objects.equals(productReviewID, that.productReviewID) && Objects.equals(customerID, that.customerID) && Objects.equals(productID, that.productID) && Objects.equals(review, that.review);
+        return rating == that.rating && Objects.equals(productReviewID, that.productReviewID) && Objects.equals(productName, that.productName) && Objects.equals(customerName, that.customerName) && Objects.equals(review, that.review);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productReviewID, customerID, productID, review, rating);
+        return Objects.hash(productReviewID, productName, customerName, review, rating);
     }
 
     @Override
     public String toString() {
         return "ProductReview{" +
                 "productReviewID='" + productReviewID + '\'' +
-                ", customerID='" + customerID + '\'' +
-                ", productID='" + productID + '\'' +
+                ", productName='" + productName + '\'' +
+                ", customerName='" + customerName + '\'' +
                 ", review='" + review + '\'' +
                 ", rating=" + rating +
                 '}';
     }
 
-    //Builder Pattern
-    public static class Builder{
+    // Builder Pattern
+    public static class Builder {
         private Long productReviewID;
-        private Long productID;
-        private Long customerID;
+        private String productName;
+        private String customerName;
         private String review;
         private int rating;
 
-        public Builder setProductReviewID(Long productReviewID){
+        public Builder setProductReviewID(Long productReviewID) {
             this.productReviewID = productReviewID;
             return this;
         }
 
-        public Builder setProductID(Long product){
-            this.productID = product;
+        public Builder setProductName(String productName) {
+            this.productName = productName;
             return this;
         }
 
-        public Builder setCustomerID(Long customer){
-            this.customerID = customer;
+        public Builder setCustomerName(String customerName) {
+            this.customerName = customerName;
             return this;
         }
 
-        public Builder setReview(String review){
+        public Builder setReview(String review) {
             this.review = review;
             return this;
         }
 
-        public Builder setRating(int rating){
+        public Builder setRating(int rating) {
             this.rating = rating;
             return this;
         }
 
-        public Builder copy(ProductReview productReview){
+        public Builder copy(ProductReview productReview) {
             this.productReviewID = productReview.productReviewID;
-            this.productID = productReview.productID;
-            this.customerID = productReview.customerID;
+            this.productName = productReview.productName;
+            this.customerName = productReview.customerName;
             this.review = productReview.review;
             this.rating = productReview.rating;
             return this;
         }
 
-        public ProductReview build(){
+        public ProductReview build() {
             return new ProductReview(this);
         }
     }

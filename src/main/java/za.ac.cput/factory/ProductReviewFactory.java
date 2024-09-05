@@ -12,28 +12,14 @@ import za.ac.cput.domain.ProductReview;
 import za.ac.cput.util.Helper;
 
 public class ProductReviewFactory {
-    public static ProductReview buildProductReview(Long productReviewID, Long productID, Long customerID, String review, int rating){
-        if (Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
+    public static ProductReview buildProductReview(Long productReviewID,String productName, String customerName, String review, int rating) {
+        if (Helper.isNullOrEmpty(productName) || Helper.isNullOrEmpty(customerName) || Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
             return null;
 
         return new ProductReview.Builder()
                 .setProductReviewID(productReviewID)
-                .setProductID(productID)
-                .setCustomerID(customerID)
-                .setReview(review)
-                .setRating(rating)
-                .build();
-    }
-
-    public static ProductReview buildProductReview(Long productID, Long customerID, String review, int rating){
-        if (Helper.isNullOrEmpty(review) || !Helper.isValidRange(rating))
-            return null;
-
-        Long productReviewID = Helper.generateIdLong();
-        return new ProductReview.Builder()
-                .setProductReviewID(productReviewID)
-                .setProductID(productID)
-                .setCustomerID(customerID)
+                .setProductName(productName)
+                .setCustomerName(customerName)
                 .setReview(review)
                 .setRating(rating)
                 .build();

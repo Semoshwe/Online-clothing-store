@@ -1,56 +1,35 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import za.ac.cput.domain.ProductReview;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestMethodOrder(MethodOrderer.MethodName.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ProductReviewFactoryTest {
-    Long productReviewID = 22L;
-    Long productID = 19L;
-    Long customerID = 20L;
+    Long productReviewID = 121L;
+    String productName = "Box Fit Unified T-shirt - UC Saw Dust/Geants De Monaco";
+    String customerName = "Siya Mthandeni";
     String review = "Great product!";
     int rating = 4;
 
     @Test
-    //This test will pass, all parameters are not null
-    void a_buildProductReview() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID, productID, customerID, review, rating);
+    @Order(1)
+    //This test will pass, all parameters are not null and productReviewID is auto-generated
+    void buildProductReview() {
+        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID,productName, customerName, review, rating);
         assertNotNull(productReview);
         System.out.println(productReview);
     }
 
     @Test
-    //This test will fail, as productReviewID is null
-    void b_buildProductReviewWithProductReviewID() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview(null, productID, customerID, review, rating);
-        assertNotNull(productReview);
-        System.out.println(productReview);
-    }
-
-    @Test
-    //This test will pass, productReviewID is auto-generated, all other parameters are not null
-    void c_buildProductReviewWithGeneratedID() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview(productID, customerID, review, rating); //productReviewID is auto-generated
-        assertNotNull(productReview);
-        System.out.println(productReview);
-    }
-
-    /*@Test
-    //This test will pass
-    void d_buildProductReview() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview("5", "22", "1", "Great product!", 4);
-        assertNotNull(productReview);
-        System.out.println(productReview);
-    }*/
-
-    @Test
-    //This test will fail, as rating is out of range
-    void d_buildProductReviewWithInvalidRating() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID, productID, customerID, review, 6);
+    @Order(3)
+    //This test will fail, as productName is null
+    void buildProductReviewWithNullProductName() {
+        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID,null, customerName, review, rating);
         assertNotNull(productReview);
         System.out.println(productReview);
     }
