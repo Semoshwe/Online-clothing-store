@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class ProductReviewFactoryTest {
-    String productReviewID = "1";
-    String productID = "1";
-    String customerID = "1";
+    Long productReviewID = 22L;
+    Long productID = 19L;
+    Long customerID = 20L;
     String review = "Great product!";
     int rating = 4;
 

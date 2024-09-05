@@ -8,20 +8,18 @@
 
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ProductReview")
-public class ProductReview {
+public class ProductReview implements Serializable {
     //Attributes
     @Id
-    private String productReviewID;
-    private String customerID;
-    private String productID;
+    private Long productReviewID;
+    private Long customerID;
+    private Long productID;
 
     private String review;
     private int rating;
@@ -40,15 +38,15 @@ public class ProductReview {
     }
 
     //Getters
-    public String getProductReviewID() {
+    public Long getProductReviewID() {
         return productReviewID;
     }
 
-    public String getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
     }
 
-    public String getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
@@ -86,23 +84,23 @@ public class ProductReview {
 
     //Builder Pattern
     public static class Builder{
-        private String productReviewID;
-        private String productID;
-        private String customerID;
+        private Long productReviewID;
+        private Long productID;
+        private Long customerID;
         private String review;
         private int rating;
 
-        public Builder setProductReviewID(String productReviewID){
+        public Builder setProductReviewID(Long productReviewID){
             this.productReviewID = productReviewID;
             return this;
         }
 
-        public Builder setProductID(String product){
+        public Builder setProductID(Long product){
             this.productID = product;
             return this;
         }
 
-        public Builder setCustomerID(String customer){
+        public Builder setCustomerID(Long customer){
             this.customerID = customer;
             return this;
         }

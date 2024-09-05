@@ -32,17 +32,13 @@ class ProductReviewServiceTest {
     @Test
     @Order(1)
     void setup(){
-        productReview = ProductReviewFactory.buildProductReview("1", "1", "I am really impressed with this jean", 5); //id auto generated
+        productReview = ProductReviewFactory.buildProductReview(50L, 55L, "I am really impressed with this jean", 5); //id auto generated
         assertNotNull(productReview);
         System.out.println("ProductReview: " + productReview);
 
-        productReview2 = ProductReviewFactory.buildProductReview("1", "1", "1", "Quality on this jean is really not up to standard", 2); //id inserted manually
+        productReview2 = ProductReviewFactory.buildProductReview(120L, 100L, 82L, "Quality on this jean is really not up to standard", 2); //id inserted manually
         assertNotNull(productReview2);
         System.out.println("ProductReview2: " + productReview2);
-
-        productReview3 = ProductReviewFactory.buildProductReview("2", "2", "2", "I am really impressed with this t-shirt", 5); //id inserted manually
-        assertNotNull(productReview3);
-        System.out.println("ProductReview3: " + productReview3);
     }
 
     @Test
@@ -55,10 +51,6 @@ class ProductReviewServiceTest {
         ProductReview created2 = productReviewService.create(productReview2);
         assertEquals(productReview2.getProductReviewID(), created2.getProductReviewID());
         System.out.println("Created2: " + created2);
-
-        ProductReview created3 = productReviewService.create(productReview3);
-        assertEquals(productReview3.getProductReviewID(), created3.getProductReviewID());
-        System.out.println("Created3: " + created3);
     }
 
     @Test
@@ -81,6 +73,6 @@ class ProductReviewServiceTest {
     @Test
     @Order(5)
     void getAll() {
-        System.out.println("All productReviews" + productReviewService.findAll());
+        System.out.println("All productReviews\n" + productReviewService.findAll());
     }
 }

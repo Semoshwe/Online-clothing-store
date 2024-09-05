@@ -13,11 +13,8 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.ProductReview;
 
 @Repository
-public interface ProductReviewRepository extends JpaRepository<ProductReview, String> {
-    ProductReview findProductReviewByProductReviewID(String productReviewID);
-    boolean deleteProductReviewByProductReviewID(String productReviewID);
-
-    ProductReview findProductReviewByCustomerID(String customerID);
-    void deleteProductReviewByCustomerID(String customerID);
-
+public interface ProductReviewRepository extends JpaRepository<ProductReview, Long> {
+    ProductReview findByProductReviewID(Long productReviewID);
+    boolean deleteProductReviewByProductReviewID(Long productReviewID);
+    boolean deleteProductReviewByRating(int rating);
 }

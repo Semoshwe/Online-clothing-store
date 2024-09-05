@@ -9,31 +9,32 @@
 package za.ac.cput.factory;
 
 import za.ac.cput.domain.Category;
-import za.ac.cput.domain.Product;
+import za.ac.cput.service.CategoryService;
 import za.ac.cput.util.Helper;
 
-import java.util.List;
-
 public class CategoryFactory {
-    public static Category buildCategory(String categoryID, String categoryName){
-        if (Helper.isNullOrEmpty(categoryID) || Helper.isNullOrEmpty(categoryName))
+    public static Category buildCategory(Long categoryId, String categoryName, String subCategoryName) {
+       if( Helper.isNullOrEmpty(categoryName) || Helper.isNullOrEmpty(subCategoryName))
+           return null;
+
+         return new Category.Builder()
+                .setCategoryId(categoryId)
+                .setCategoryName(categoryName)
+                .setSubCategoryName(subCategoryName)
+                .build();
+        }
+
+    public static Category buildCategory2(String categoryName, String subCategoryName) {
+        if(Helper.isNullOrEmpty(categoryName) || Helper.isNullOrEmpty(subCategoryName))
             return null;
 
-        return new Category.Builder()
-                .setCategoryID(categoryID)
+        Long categoryId = Helper.generateIdLong();
+
+        Category category = new Category.Builder()
+                .setCategoryId(categoryId)
                 .setCategoryName(categoryName)
+                .setSubCategoryName(subCategoryName)
                 .build();
-    }
-
-    public static Category buildCategory(String categoryName){
-        if (Helper.isNullOrEmpty(categoryName))
-            return null;
-
-        String categoryID = Helper.generateId();
-
-        return new Category.Builder()
-                .setCategoryID(Helper.generateId())
-                .setCategoryName(categoryName)
-                .build();
+        return category;
     }
 }
