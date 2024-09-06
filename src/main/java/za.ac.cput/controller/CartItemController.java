@@ -19,7 +19,7 @@ public class CartItemController {
     }
 
     @GetMapping("/read/{id}")
-    public CartItem read(@PathVariable String id){
+    public CartItem read(@PathVariable long id){
         return cartItemService.read(id);
     }
 

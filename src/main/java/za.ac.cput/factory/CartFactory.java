@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CartFactory {
 
-    public static Cart buildCart(String cartID, String customerID, double totalAmpount, List<CartItem> cartItems){
+    public static Cart buildCart(long cartID, long customerID, double totalAmpount, List<CartItem> cartItems){
         if(Helper.isNullOrEmpty(cartID) ||
                 Helper.isNullOrEmpty(customerID) ||
                 totalAmpount == 0 || Helper.isNullOrEmpty(cartItems.toString()))

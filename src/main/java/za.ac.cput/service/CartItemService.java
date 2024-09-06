@@ -23,8 +23,8 @@ public class CartItemService implements ICartItemService{
     public CartItem create(CartItem cartItem) { return repository.save(cartItem);}
 
     @Override
-    public CartItem read(String Id) {
-        return this.repository.findById(Id).orElse(null);
+    public CartItem read(Long Id) {
+        return this.repository.findById(String.valueOf(Id)).orElse(null);
     }
 
     @Override

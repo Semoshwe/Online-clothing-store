@@ -9,5 +9,5 @@ import za.ac.cput.domain.CartItem;
  * Author: Kinzonzi Genereux Mukoko - 221477934
  * Date: 18 May 2024
  * */
-public interface ICartItemService extends IService<CartItem,String>{
+public interface ICartItemService extends IService<CartItem,Long>{
 }

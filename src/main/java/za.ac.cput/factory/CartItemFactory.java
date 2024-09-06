@@ -13,7 +13,7 @@ import za.ac.cput.util.Helper;
 import java.util.List;
 
 public class CartItemFactory {
-    public static CartItem buildCart(String cartItemID, String cartID,String productID, double price){
+    public static CartItem buildCartItem(long cartItemID, String cartID,long productID, double price){
         if(Helper.isNullOrEmpty(cartItemID) ||
                 Helper.isNullOrEmpty(cartID) ||
                 price == 0 || Helper.isNullOrEmpty(productID))
@@ -25,4 +25,6 @@ public class CartItemFactory {
                 .setPrice(price)
                 .build();
     }
+
+
 }

@@ -6,18 +6,17 @@ package za.ac.cput.domain;
  * Author: Kinzonzi Genereux Mukoko - 221477934
  * Date: 14 May 2024
  */
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 @Entity
 @Embeddable
 public class CartItem {
     @Id
-    private String cartItemID;
-    private String cartID;
-    private String productID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long cartItemID;
+    private long cartID;
+    private long productID;
     private double price;
 
     protected CartItem(){};
@@ -28,15 +27,15 @@ public class CartItem {
         this.productID = builder.productID;
         this.price = builder.price;
     }
-    public String getCartItemID() {
+    public long getCartItemID() {
         return cartItemID;
     }
 
-    public String getCartID() {
+    public long getCartID() {
         return cartID;
     }
 
-    public String getProductID() {
+    public long getProductID() {
         return productID;
     }
 
@@ -68,22 +67,22 @@ public class CartItem {
     }
 
     public static class Builder{
-        private String cartItemID;
-        private String cartID;
-        private String productID;
+        private long cartItemID;
+        private long cartID;
+        private long productID;
         private double price;
 
-        public CartItem.Builder setCartItemID(String cartItemID){
+        public CartItem.Builder setCartItemID(long cartItemID){
             this.cartItemID = cartItemID;
             return this;
         }
 
-        public CartItem.Builder setCartID(String cartID){
+        public CartItem.Builder setCartID(long cartID){
             this.cartID = cartID;
             return this;
         }
 
-        public CartItem.Builder setProductID(String productID){
+        public CartItem.Builder setProductID(long productID){
             this.productID = productID;
             return this;
         }

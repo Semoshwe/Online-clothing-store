@@ -13,11 +13,11 @@ import java.util.Objects;
 @Entity
 public class Cart {
     @Id
-    private String cartID;
-    private String customerID;
+    private long cartID;
+    private long customerID;
     @ElementCollection
     @CollectionTable(
-            name="CartItem",
+            name="Cart_items",
             joinColumns=@JoinColumn(name="cart_id")
     )
     private List<CartItem> cartItems;
@@ -32,11 +32,11 @@ public class Cart {
         this.totalAmount = builder.totalAmount;
     }
 
-    public String getCartID() {
+    public long getCartID() {
         return cartID;
     }
 
-    public String getCustomerID() {
+    public long getCustomerID() {
         return customerID;
     }
 
@@ -72,17 +72,17 @@ public class Cart {
     }
 
     public static class Builder{
-        private String cartID;
-        private String customerID;
+        private long cartID;
+        private long customerID;
         private List<CartItem> cartItems;
         private double totalAmount;
 
-        public Builder setCartID(String cartID) {
+        public Builder setCartID(long cartID) {
             this.cartID = cartID;
             return this;
         }
 
-        public Builder setCustomerID(String customerID) {
+        public Builder setCustomerID(long customerID) {
             this.customerID = customerID;
             return this;
         }
