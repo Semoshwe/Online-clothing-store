@@ -1,9 +1,9 @@
 /*
-* ProductReviewService.java
-* Service for the ProductReview
-* Author: Mthandeni Mbobo (218223579)
-* Date: 18 May 2024
-* */
+ * ProductReviewService.java
+ * Service for the ProductReview
+ * Author: Mthandeni Mbobo (218223579)
+ * Date: 18 May 2024
+ * */
 
 package za.ac.cput.service;
 
@@ -15,9 +15,9 @@ import za.ac.cput.repository.ProductReviewRepository;
 import java.util.List;
 
 @Service
-public class ProductReviewService implements IProductReviewService{
+public class ProductReviewService implements IProductReviewService {
 
-    private  final ProductReviewRepository repository;
+    private final ProductReviewRepository repository;
 
     @Autowired
     public ProductReviewService(ProductReviewRepository repository) {

@@ -18,18 +18,18 @@ class ProductReviewFactoryTest {
 
     @Test
     @Order(1)
-    //This test will pass, all parameters are not null and productReviewID is auto-generated
+        //This test will pass, all parameters are not null
     void buildProductReview() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID,productName, customerName, review, rating);
+        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID, productName, customerName, review, rating);
         assertNotNull(productReview);
         System.out.println(productReview);
     }
 
     @Test
-    @Order(3)
-    //This test will fail, as productName is null
+    @Order(2)
+        //This test will fail, as productName is null
     void buildProductReviewWithNullProductName() {
-        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID,null, customerName, review, rating);
+        ProductReview productReview = ProductReviewFactory.buildProductReview(productReviewID, null, customerName, review, rating);
         assertNotNull(productReview);
         System.out.println(productReview);
     }

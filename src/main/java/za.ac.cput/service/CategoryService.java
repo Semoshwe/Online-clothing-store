@@ -1,9 +1,9 @@
 /*
-* CategoryService.java
-* Service for the Category
-* Author: Mthandeni Mbobo (218223579)
-* Date: 18 May 2024
-* */
+ * CategoryService.java
+ * Service for the Category
+ * Author: Mthandeni Mbobo (218223579)
+ * Date: 18 May 2024
+ * */
 
 package za.ac.cput.service;
 
@@ -15,13 +15,15 @@ import za.ac.cput.repository.CategoryRepository;
 import java.util.List;
 
 @Service
-public class CategoryService  implements ICategoryService{
+public class CategoryService implements ICategoryService {
+
     private final CategoryRepository repository;
 
     @Autowired
     public CategoryService(CategoryRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public Category create(Category category) {
         return this.repository.save(category);
@@ -29,16 +31,20 @@ public class CategoryService  implements ICategoryService{
 
     @Override
     public Category read(Long categoryId) {
-        return this.repository.findById(categoryId).orElseThrow(() -> new RuntimeException("Category not found"));
+        return this.repository.findById(categoryId).orElse(null);
     }
 
     @Override
     public Category update(Category category) {
-        return this.repository.save(category);
+        if (repository.existsById(category.getCategoryId())) {
+            return repository.save(category);  // Save only if the record exists
+        } else {
+            return null;  // Return null if the record doesn't exist to avoid creating a new one
+        }
     }
 
     @Override
-    public  List<Category> findAll() {
+    public List<Category> findAll() {
         return this.repository.findAll();
     }
 
@@ -48,13 +54,8 @@ public class CategoryService  implements ICategoryService{
     }
 
 //    @Override
-//    public List<Category> findByCategoryName(String categoryName) {
-//        return this.repository.findByCategoryName(categoryName);
+//    public boolean delete(Long categoryId) {
+//        this.repository.deleteById(categoryId);
+//        return !this.repository.existsById(categoryId);
 //    }
-//
-//    @Override
-//    public List<Category> findByCategoryId(Long categoryId) {
-//        return this.repository.findByCategoryId(categoryId);
-//    }
-
 }
