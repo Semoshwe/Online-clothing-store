@@ -1,5 +1,6 @@
 package za.ac.cput.controller;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ class ProductControllerTest {
 
     @BeforeEach
     void setUp() {
+        // Initialize a Product object before each test
         product = new Product.Builder()
                 .setProductId(28L)
                 .setName("African head")
@@ -39,8 +41,8 @@ class ProductControllerTest {
 
     @Test
     void createProduct() {
+        // Test creating a new product
         ResponseEntity<Product> response = restTemplate.postForEntity("/store/api/products", product, Product.class);
-        System.out.println(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(product.getName(), response.getBody().getName());
@@ -48,6 +50,7 @@ class ProductControllerTest {
 
     @Test
     void getProductById() {
+        // Test retrieving a product by its ID
         Product createdProduct = restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product> response = restTemplate.getForEntity("/store/api/products/" + createdProduct.getProductId(), Product.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -57,6 +60,7 @@ class ProductControllerTest {
 
     @Test
     void updateProduct() {
+        // Test updating an existing product
         Product createdProduct = restTemplate.postForObject("/store/api/products", product, Product.class);
         createdProduct = new Product.Builder().copy(createdProduct).setName("Updated Product").build();
         HttpEntity<Product> requestUpdate = new HttpEntity<>(createdProduct);
@@ -68,6 +72,7 @@ class ProductControllerTest {
 
     @Test
     void deleteProduct() {
+        // Test deleting a product
         Product createdProduct = restTemplate.postForObject("/store/api/products", product, Product.class);
         restTemplate.delete("/store/api/products/" + createdProduct.getProductId());
         ResponseEntity<Product> response = restTemplate.getForEntity("/store/api/products/" + createdProduct.getProductId(), Product.class);
@@ -76,6 +81,7 @@ class ProductControllerTest {
 
     @Test
     void getAllProducts() {
+        // Test retrieving all products
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products", Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -85,6 +91,7 @@ class ProductControllerTest {
 
     @Test
     void getProductsByName() {
+        // Test retrieving products by name
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products/name/" + product.getName(), Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -94,6 +101,7 @@ class ProductControllerTest {
 
     @Test
     void getProductsByCategoryId() {
+        // Test retrieving products by category ID
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products/category/" + product.getCategoryId(), Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -103,6 +111,7 @@ class ProductControllerTest {
 
     @Test
     void getProductsByPriceRange() {
+        // Test retrieving products within a price range
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products/price-range?minPrice=10.00&maxPrice=11.00", Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -112,6 +121,7 @@ class ProductControllerTest {
 
     @Test
     void getProductsByStockQuantityGreaterThan() {
+        // Test retrieving products by stock quantity greater than a specified value
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products/stock-quantity-greater-than?stockQuantity=5", Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -121,6 +131,7 @@ class ProductControllerTest {
 
     @Test
     void getProductsCreatedAfter() {
+        // Test retrieving products created after a specific date
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products/created-after?createdAt=" + LocalDate.now().minusDays(1), Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -130,10 +141,16 @@ class ProductControllerTest {
 
     @Test
     void getProductsUpdatedBefore() {
+        // Test retrieving products updated before a specific date
         restTemplate.postForObject("/store/api/products", product, Product.class);
         ResponseEntity<Product[]> response = restTemplate.getForEntity("/store/api/products/updated-before?updatedAt=" + LocalDate.now(), Product[].class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertTrue(response.getBody()[0].getUpdatedAt().isBefore(ChronoLocalDateTime.from(LocalDate.now().plusDays(1))));
+    }
+
+    @AfterEach
+    void tearDown() {
+        // Cleanup after each test if necessary
     }
 }

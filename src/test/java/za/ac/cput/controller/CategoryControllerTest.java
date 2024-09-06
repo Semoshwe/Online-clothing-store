@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CategoryControllerTest {
 
-   @Autowired
+    @Autowired
     private TestRestTemplate restTemplate;
     private final String BASE_URL = "http://localhost:8080/shopping_store/category";
     private static Category category;
@@ -110,3 +110,4 @@ class CategoryControllerTest {
         System.out.println(response.getBody());
         assertNotNull(response.getBody());
     }
+}
