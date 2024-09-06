@@ -19,9 +19,10 @@ import java.util.Objects;
 @Entity
 public class Category implements Serializable {
     @Id
-    private  Long categoryId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long categoryId;
     private String categoryName;
-    private  String subCategoryName;
+    private String subCategoryName;
 
     public Category() {
     }

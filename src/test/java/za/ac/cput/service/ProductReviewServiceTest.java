@@ -1,9 +1,9 @@
 /*
-* ProductReviewServiceTest.java
-* Test for the ProductReviewService
-* Author: Mthandeni Mbobo (218223579)
-* Date: 18 May 2024
-* */
+ * ProductReviewServiceTest.java
+ * Test for the ProductReviewService
+ * Author: Mthandeni Mbobo (218223579)
+ * Date: 18 May 2024
+ * */
 
 package za.ac.cput.service;
 
@@ -31,8 +31,8 @@ class ProductReviewServiceTest {
 
     @Test
     @Order(1)
-    void setup(){
-        productReview = ProductReviewFactory.buildProductReview(null,"Box Fit Unified T-shirt - UC Saw Dust/Geants De Monaco", "Siya Mthandeni", "I am really impressed with this jean", 5); //id auto generated
+    void setup() {
+        productReview = ProductReviewFactory.buildProductReview(null, "Box Fit Unified T-shirt - UC Saw Dust/Geants De Monaco", "Siya Mthandeni", "I am really impressed with this jean", 5); //id auto generated
         assertNotNull(productReview);
         System.out.println("ProductReview: " + productReview);
     }
@@ -67,4 +67,11 @@ class ProductReviewServiceTest {
     void getAll() {
         System.out.println("All productReviews\n" + productReviewService.findAll());
     }
+
+//    @Test
+//    @Order(6)
+//    void delete() {
+//        productReviewService.delete(productReview.getProductReviewID());
+//        System.out.println("Deleted productReview: " + productReview.getProductReviewID());
+//    }
 }

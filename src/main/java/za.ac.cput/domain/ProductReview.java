@@ -4,11 +4,12 @@
  * This POJO class for the ProductReview entity. Domain class using Builder Pattern
  * Author: Mthandeni Mbobo - 218223579
  * Date: 22 March 2024
- * */
+ */
 
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 

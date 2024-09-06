@@ -4,7 +4,7 @@
  * This class provides the interface for the Category entity
  * Author: Mthandeni Mbobo - 218223579
  * Date: 22 March 2024
- * */
+ */
 
 package za.ac.cput.repository;
 
@@ -15,9 +15,8 @@ import za.ac.cput.domain.Category;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository  extends  JpaRepository<Category, Long> {
-    List<Category> findByCategoryName(String categoryName);
-    List<Category> findByCategoryId(Long categoryId);
-    boolean deleteCategoryByCategoryId(Long categoryId);
-    boolean deleteCategoryByCategoryName(String categoryName);
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+    void deleteByCategoryId(Long categoryId);
+
+    void findByCategoryId(Long categoryId);
 }

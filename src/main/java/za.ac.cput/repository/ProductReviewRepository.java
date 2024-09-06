@@ -4,7 +4,7 @@
  * This class provides the interface for the ProductReview entity
  * Author: Mthandeni Mbobo - 218223579
  * Date: 22 March 2024
- * */
+ */
 
 package za.ac.cput.repository;
 
@@ -16,5 +16,6 @@ import za.ac.cput.domain.ProductReview;
 public interface ProductReviewRepository extends JpaRepository<ProductReview, Long> {
 
     void deleteByProductReviewID(Long productReviewID);
+
     void findByProductReviewID(Long productReviewID);
 }

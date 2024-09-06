@@ -18,32 +18,47 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
+
     @Autowired
     private CategoryService categoryService;
 
     @PostMapping("/create")
     public Category create(@RequestBody Category category) {
         return categoryService.create(category);
-    } // create method for Category
-
-    @GetMapping("/read/{id}")
-    public Category read(@PathVariable Long id) {
-        return categoryService.read(id);
     }
 
-    @PostMapping("/update")
-    public Category update(@RequestBody Category category) {
-        return categoryService.update(category);
+    @GetMapping("/read/{categoryId}")
+    public ResponseEntity<Category> read(@PathVariable Long categoryId) {
+        Category category = categoryService.read(categoryId);
+        if (category != null) {
+            return ResponseEntity.ok(category);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Category> update(@RequestBody Category category) {
+        Category updated = categoryService.update(category);
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/delete/{categoryId}")
+    public ResponseEntity<Void> delete(@PathVariable Long categoryId) {
+        if (categoryService.read(categoryId) != null) {
+            categoryService.delete(categoryId);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/getAll")
     public List<Category> getAll() {
         return categoryService.findAll();
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Category> delete(@PathVariable Long id) {
-        categoryService.delete(id);
-        return ResponseEntity.ok().build();
     }
 }

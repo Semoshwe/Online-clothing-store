@@ -1,9 +1,9 @@
 /*
-* ProductReviewController.java
-* Controller for the ProductReview
-* Author: Mthandeni Mbobo (218223579)
-* Date: 23 May 2024
-* */
+ * ProductReviewController.java
+ * Controller for the ProductReview
+ * Author: Mthandeni Mbobo (218223579)
+ * Date: 23 May 2024
+ * */
 
 package za.ac.cput.controller;
 
@@ -19,13 +19,13 @@ import java.util.List;
 @RequestMapping("/productReview")
 public class ProductReviewController {
 
-        @Autowired
-        private ProductReviewService productReviewService;
+    @Autowired
+    private ProductReviewService productReviewService;
 
-        @PostMapping("/create")
-        public ProductReview create(@RequestBody ProductReview productReview){
-            return productReviewService.create(productReview);
-        }
+    @PostMapping("/create")
+    public ProductReview create(@RequestBody ProductReview productReview) {
+        return productReviewService.create(productReview);
+    }
 
     @GetMapping("/read/{productReviewID}")
     public ResponseEntity<ProductReview> read(@PathVariable Long productReviewID) {
@@ -47,8 +47,7 @@ public class ProductReviewController {
             return ResponseEntity.notFound().build();  // Return 404 if the product review wasn't found
         }
     }
-
-
+    
     @DeleteMapping("/delete/{productReviewID}")
     public ResponseEntity<Void> delete(@PathVariable Long productReviewID) {
         if (productReviewService.read(productReviewID) != null) {
@@ -61,7 +60,7 @@ public class ProductReviewController {
 
 
     @GetMapping("/getAll")
-        public List<ProductReview> getAll(){
-            return productReviewService.findAll();
-        }
+    public List<ProductReview> getAll() {
+        return productReviewService.findAll();
+    }
 }

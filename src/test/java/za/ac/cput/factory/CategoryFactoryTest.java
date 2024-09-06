@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CategoryFactoryTest {
     Long categoryId = 1L;
-    String categoryName = "Shoes";
-    String subCategoryName = "Sneakers";
+    String categoryName = "Women";
+    String subCategoryName = "Tops";
 
     @Test
     @Order(1)
@@ -25,21 +25,10 @@ class CategoryFactoryTest {
 
     @Test
     @Order(2)
-    //This test will pass, all parameters are not null
-    void buildCategory2() {
-        Category category = CategoryFactory.buildCategory2(categoryName, subCategoryName);
-        assertNotNull(category);
-        System.out.println(category);
-    }
-
-    @Test
-    @Order(3)
-    //failing test
+    //This test will fail, as categoryName is null
     void buildCategoryWithNullCategoryName() {
         Category category = CategoryFactory.buildCategory(categoryId, null, subCategoryName);
         assertNotNull(category);
         System.out.println(category);
-
     }
-
 }
