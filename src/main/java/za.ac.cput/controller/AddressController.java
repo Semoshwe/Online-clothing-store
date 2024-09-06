@@ -17,7 +17,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/address")
-@CrossOrigin(origins = "*")
 public class AddressController {
 
     @Autowired
@@ -29,8 +28,16 @@ public class AddressController {
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
+
+//    @PostMapping(path = "/add")
+//    public ResponseEntity<Address> addAddress(@RequestBody Address address) {
+//        Address newAddress = addressService.create(address);
+//        return new ResponseEntity<>(newAddress, HttpStatus.CREATED);
+//    }
+
+
     @GetMapping(value = "/read/{id}")
-    public ResponseEntity<Address> read(@PathVariable String id) {
+    public ResponseEntity<Address> read(@PathVariable Long id) {
         Address address = addressService.read(id);
         if (address != null) {
             return new ResponseEntity<>(address, HttpStatus.OK);
@@ -38,6 +45,11 @@ public class AddressController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+//    @DeleteMapping(value = "/delete/{id}")
+//    public void delete (@PathVariable String id){
+//
+//    }
 
     @PostMapping(value = "/update")
     public ResponseEntity<Address> update(@RequestBody Address address) {
@@ -47,7 +59,7 @@ public class AddressController {
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<Address>> findAll() {
-        List<Address> addresses = addressService.findAll();
+        List<Address> addresses = addressService.getAll();
         return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
 

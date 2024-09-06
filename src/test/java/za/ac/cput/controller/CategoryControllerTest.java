@@ -1,3 +1,4 @@
+
 package za.ac.cput.controller;
 
 import org.junit.jupiter.api.*;
@@ -109,13 +110,3 @@ class CategoryControllerTest {
         System.out.println(response.getBody());
         assertNotNull(response.getBody());
     }
-
-//    @Test
-//    @Order(5)
-//    void delete() {
-//        String url = BASE_URL + "/delete/" + category.getCategoryId();
-//        System.out.println("URL: " + url);
-//        restTemplate.delete(url);
-//        System.out.println("Category deleted: " + category.getCategoryId());
-//    }
-}

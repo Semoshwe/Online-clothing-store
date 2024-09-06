@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String orderID;
+    private Long orderID;
     private String customerID;
     private String addressID;
     @CreationTimestamp
@@ -30,7 +30,7 @@ public class Orders implements Serializable {
         this.orderItemsID = builder.orderItemsID;
     }
 
-    public String  getOrderID() {
+    public Long  getOrderID() {
         return orderID;
     }
 
@@ -108,7 +108,7 @@ public class Orders implements Serializable {
     }
 
     public static class Builder {
-        private String orderID;
+        private Long orderID;
         private String customerID;
         private String addressID;
         private LocalDate orderDate;
@@ -116,7 +116,7 @@ public class Orders implements Serializable {
         private String status;
         private String orderItemsID;
 
-        public Builder setOrderID(String orderID) {
+        public Builder setOrderID(Long orderID) {
             this.orderID = orderID;
             return this;
         }

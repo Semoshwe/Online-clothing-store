@@ -2,23 +2,33 @@ package za.ac.cput.service;
 
 import za.ac.cput.domain.User;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
-public interface IUserService extends IService<User, String>{
+/**
+ * IUserService.java
+ *
+ * @author Rethabile Ntsekhe
+ * Student Num: 220455430
+ * @date 25-Aug-24
+ */
 
-    /**
-     * Finds users by their email address.
-     *
-     * @param email the email address to search for
-     * @return a list of users with the given email
-     */
-    List<User> findByEmail(String email);
+public interface IUserService extends IService<User, Long>{
 
-    /**
-     * Finds users by their last name.
-     *
-     * @param lastName the last name to search for
-     * @return a list of users with the given last name
-     */
+    void delete(Long id);
+
+    List<User> findAll();
+
+    Optional<User> findByEmail(String email);
+
+    List<User> findByFirstName(String firstName);
+
     List<User> findByLastName(String lastName);
+
+    List<User> findByBirthDate(LocalDate birthDate);
+
+    List<User> findByPhoneNumber(String phoneNumber);
+
+    List<User> findByRole(String role);
 }

@@ -3,41 +3,70 @@ package za.ac.cput.factory;
 import za.ac.cput.domain.User;
 import za.ac.cput.util.Helper;
 
+import java.time.LocalDate;
+import java.util.Set;
+
+/**
+ * Factory class for creating instances of {@link User}.
+ * Provides static methods to create {@link User} objects from various inputs.
+ *
+ * Author: Rethabile Ntsekhe
+ * Student Num: 220455430
+ * Date: 24-Aug-24
+ */
 public class UserFactory {
 
+
     /**
-     * Creates a User object if all required fields are valid.
+     * Creates a {@link User} instance from various input parameters.
      *
-     * @param userID      the user ID
-     * @param firstName   the user's first name
-     * @param lastName    the user's last name
-     * @param password    the user's password
-     * @param email       the user's email address
-     * @param addressID   the address ID
-     * @param customerID  the customer ID
-     * @return a User object if all validations pass; otherwise, null
+     * @param avatar      the avatar of the user
+     * @param firstName   the first name of the user
+     * @param lastName    the last name of the user
+     * @param email       the email address of the user
+     * @param birthDate   the birth date of the user
+     * @param role        the roles of the user
+     * @param phoneNumber the phone number of the user
+     * @param password    the password of the user
+     * @return a new {@link User} object with properties set from the input parameters
      */
-    public static User createUser(String userID, String firstName, String lastName,
-                                 String password, String email, String addressID, String customerID) {
-        if (Helper.isNullOrEmpty(userID) || Helper.isNullOrEmpty(firstName) ||
-            Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(password) ||
-            Helper.isNullOrEmpty(addressID)) {
-            return null;
+    public static User createUser(String avatar, String firstName, String lastName, String email,
+                                  LocalDate birthDate, Set<String> role, String phoneNumber, String password) {
+        // Validation checks
+        if (Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName) || Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(password)) {
+            throw new IllegalArgumentException("First name, last name, email, and password cannot be null or empty");
         }
 
-        String regex = "^(.+)@(\\S+)$";
-        if (!Helper.isEmailValid(email, regex)) {
-            return null;
-        }
-
+        // Create a new User object using the Builder pattern
         return new User.Builder()
-                .setUserID(userID)
+                .setAvatar(avatar)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
+                .setBirthDate(birthDate)
+                .setRole(role) // Set the roles as a Set<String>
+                .setPhoneNumber(phoneNumber)
                 .setPassword(password)
-                .setAddressID(addressID)
-                .setCustomerID(customerID)
                 .build();
-}
+    }
+
+    /**
+     * Creates a {@link User} instance for sign-in with only email and password.
+     *
+     * @param email       the email address of the user
+     * @param password    the password of the user
+     * @return a new {@link User} object with properties set from the input parameters
+     */
+    public static User createUserForSignIn(String email, String password) {
+        // Validation checks
+        if (Helper.isNullOrEmpty(email) || Helper.isNullOrEmpty(password)) {
+            throw new IllegalArgumentException("Email and password cannot be null or empty");
+        }
+
+        // Create a new User object using the Builder pattern with default or null values for other fields
+        return new User.Builder()
+                .setEmail(email)
+                .setPassword(password)
+                .build();
+    }
 }
